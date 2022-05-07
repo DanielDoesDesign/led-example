@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tweakpane/core": "^1.0.9",
     "@tweakpane/plugin-essentials": "^0.1.4",
     "@types/bootstrap": "^5.1.11",
     "@types/p5": "^1.3.3",

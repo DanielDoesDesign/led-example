@@ -82,6 +82,7 @@ class P5JS_App extends Component {
 				;
 			</div>
 		);
+		
 	}
 }
 
