@@ -32,15 +32,15 @@ export class GeneralLights {
 
 		// LOADER
 
-		const geoPlane = new THREE.PlaneGeometry(100, 100);
+		const geoPlane = new THREE.PlaneGeometry(300, 300);
 		//const matPlane = new THREE.MeshStandardMaterial();
 		//matPlane.side = THREE.DoubleSide;
 		const mshPlane = new THREE.Mesh(geoPlane, material);
 		mshPlane.receiveShadow = true;
 
 		scene.add(mshPlane);
-		mshPlane.position.set(50, 50, 0);
+		mshPlane.position.set(150, 150, 0);
 	}
 
-	update(time) {}
+	update(time) { }
 }

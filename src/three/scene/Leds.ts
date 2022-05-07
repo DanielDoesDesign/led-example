@@ -33,7 +33,7 @@ export function Ledstest(scene) {
 	const matLed = new THREE.MeshStandardMaterial({color: 0xffffff});
 	const mshLed = new THREE.Mesh(geoLed5050,matLed);
 	
-	//localLed.add(mshLed);
+	localLed.add(mshLed);
 	mshLed.position.set(0,0,-depth - (ledThickness/2));
 
 	const lightOffset = 0;

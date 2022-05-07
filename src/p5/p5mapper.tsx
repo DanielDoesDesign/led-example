@@ -4,6 +4,7 @@ import type P5 from "p5/index"
 import { Ratio } from "react-bootstrap";
 import { Boundary } from "./func/Boundary";
 import { pointer } from "./func/Select";
+import { Particle } from "./func/Particle"
 
 class P5JS_App extends Component {
 	x: number

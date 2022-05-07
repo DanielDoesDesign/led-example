@@ -1,6 +1,6 @@
 //Essentially the "LED" class
 
-class Particle {
+export class Particle {
   constructor(x, y) {
     this.pos = createVector(x, y)
     this.rays = []
@@ -30,16 +30,15 @@ class Particle {
       let closest = null
       let record = Infinity
       
-       
-      
-      for (let wall of walls) {
-        let pt = ray.cast(wall)   // check if cast hits a wall at all
-        if (pt) {                  //if larger than 0 (true)
-          let d = p5.Vector.dist(this.pos, pt)  //distance to point intersection?
-          if (d < record) {  //if distance is smaller than "recorded smallest collision"
-            closest = pt
-            record = d
-          }
+
+    for (let wall of walls) {
+      let pt = ray.cast(wall)   // check if cast hits a wall at all
+      if (pt) {                  //if larger than 0 (true)
+        let d = p5.Vector.dist(this.pos, pt)  //distance to point intersection?
+        if (d < record) {  //if distance is smaller than "recorded smallest collision"
+          closest = pt
+          record = d
+        }
           
         }
       }

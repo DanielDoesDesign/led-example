@@ -2,10 +2,13 @@ import * as THREE from "three";
 import { sRGBEncoding, ACESFilmicToneMapping } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { fpsGraph } from "./core/gui";
+import "./style.css";
+
+
 import { SceneHelpers } from "./scene/SceneSubject";
 import { GeneralLights } from "./scene/GeneralLights";
 import { Ledstest } from "./scene/Leds";
-import "./style.css";
+import { paths } from "./scene/paths";
 
 export default class SceneManager {
 	screenDimensions: { width: number; height: number };
@@ -44,6 +47,7 @@ export default class SceneManager {
 			new GeneralLights(this.scene),
 			new SceneHelpers(this.scene),
 			new Ledstest(this.scene),
+			new paths(this.scene)
 		];
 
 		return sceneSubjects;
