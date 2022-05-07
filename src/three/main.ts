@@ -19,9 +19,14 @@ export default class SceneManager {
 	constructor(private canvas: HTMLCanvasElement) {
 		this.clock = new THREE.Clock();
 
+		//this.screenDimensions = {
+		//	width: window.innerWidth,
+	//		height: window.innerHeight,
+	//	};
+
 		this.screenDimensions = {
-			width: window.innerWidth,
-			height: window.innerHeight,
+			width: 800,
+			height: 600,
 		};
 
 		this.scene = this.buildScene();
@@ -125,8 +130,11 @@ export default class SceneManager {
 		this.canvas.style.width = "100%";
 		this.canvas.style.height = "100%";
 
-		this.canvas.width = window.innerWidth;
-		this.canvas.height = window.innerHeight;
+		this.canvas.width = 800;
+		this.canvas.height = 600;
+
+		//this.canvas.width = window.innerWidth;
+		//this.canvas.height = window.innerHeight;
 
 		this.onWindowResize();
 	}

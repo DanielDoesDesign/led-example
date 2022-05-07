@@ -1,5 +1,4 @@
 let selectedObj = null;
-import { collideCircleCircle, collidePointCircle} from '../core/p5.colliide2d'
 
 export class pointer{
    constructor(p) {

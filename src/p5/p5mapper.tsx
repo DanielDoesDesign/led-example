@@ -43,7 +43,7 @@ class P5JS_App extends Component {
 		//this.walls.push(new Boundary(p5, this.sw, this.sh, 0 , this.sh))
 		//this.walls.push(new Boundary(p5, 0 , this.sh, 0 , 0))
 
-		this.curser = new pointer();
+		//this.curser = new pointer();
 	};
 
 	drawGrid(p5: P5, sizX: number, sizY: number, spcX: number, spcY: number) {

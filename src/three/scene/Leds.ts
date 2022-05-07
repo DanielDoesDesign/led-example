@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-import { randFloat, randInt } from 'three/src/math/MathUtils';
 import { gui } from '../core/gui'
 
 export function Ledstest(scene) {
@@ -99,13 +98,6 @@ export function Ledstest(scene) {
 		spots[i].penumbra = pn;
 		}}
 
-
-
-
-
-
-
-
 	function toggleHelpers(state){
 		for (let i = 0; i < helpers.length; i++) {
 	helpers[i].visible = state;
@@ -113,8 +105,8 @@ export function Ledstest(scene) {
 }
 
 
-
-	gui.addInput(ledGroup.position, 'z', {
+/*
+gui.addInput(ledGroup.position, 'z', {
 		label: 'LED Z', min: -30, max: 30, step: 1})
 
  gui.addInput(spots[0], 'angle', 
@@ -129,12 +121,14 @@ export function Ledstest(scene) {
 	 updateLedsPn(ev.value);
    });
 
-
+*/
 gui.addInput(helpers[0], 'visible', { label: 'LED HELPER'})
 .on('change', (ev) => {
 	console.log(ev.value);
 	toggleHelpers(ev.value);
 });
+
+
 
 
 	this.update = function(time) {

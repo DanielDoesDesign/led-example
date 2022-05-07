@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { gui } from '../core/gui'
+//import { gui } from '../core/gui'
 
 export function SceneHelpers(scene) {
 	const ambientLight = new THREE.AmbientLight(0x555555, 0.2)
@@ -11,9 +11,9 @@ export function SceneHelpers(scene) {
 	const axesHelper = new THREE.AxesHelper( 100);
 	scene.add(axesHelper)
 
-	gui.addInput(axesHelper, 'visible', {
-	label: 'AxesHelper',
-	})
+	//gui.addInput(axesHelper, 'visible', {
+	//label: 'AxesHelper',
+	///})
 
 	const gridSize = 30;
 
@@ -27,9 +27,9 @@ export function SceneHelpers(scene) {
 	Grid.visible = false;
 	scene.add(Grid);
 
-	gui.addInput(Grid, 'visible', {
-		label: 'Grid',
-		})
+	//gui.addInput(Grid, 'visible', {
+	//	label: 'Grid',
+	//	})
 
 	
 	this.update = function(time) {
