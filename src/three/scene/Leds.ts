@@ -105,7 +105,7 @@ export function Ledstest(scene) {
 }
 
 
-/*
+
 gui.addInput(ledGroup.position, 'z', {
 		label: 'LED Z', min: -30, max: 30, step: 1})
 
@@ -121,7 +121,7 @@ gui.addInput(ledGroup.position, 'z', {
 	 updateLedsPn(ev.value);
    });
 
-*/
+
 gui.addInput(helpers[0], 'visible', { label: 'LED HELPER'})
 .on('change', (ev) => {
 	console.log(ev.value);
