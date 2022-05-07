@@ -1,141 +1,133 @@
-import * as THREE from 'three'
-import {
-    sRGBEncoding,
-    PCFShadowMap,
-    ACESFilmicToneMapping,
-  } from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-const canvas: HTMLCanvasElement = document.querySelector('#webgl') as HTMLCanvasElement
-import { fpsGraph } from './core/gui'
-import { SceneHelpers } from "./scene/SceneSubject"
-import { GeneralLights } from "./scene/GeneralLights"
-import { Ledstest } from "./scene/Leds"
-import '../style.css'
+import * as THREE from "three";
+import { sRGBEncoding, ACESFilmicToneMapping } from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { fpsGraph } from "./core/gui";
+import { SceneHelpers } from "./scene/SceneSubject";
+import { GeneralLights } from "./scene/GeneralLights";
+import { Ledstest } from "./scene/Leds";
+import "./style.css";
 
+export default class SceneManager {
+	screenDimensions: { width: number; height: number };
+	scene: THREE.Scene;
+	renderer: THREE.WebGLRenderer;
+	camera: THREE.PerspectiveCamera;
+	controls: OrbitControls;
+	sceneSubjects: any[]
+	clock: THREE.Clock
 
-function SceneManager(canvas) {
+	constructor(private canvas: HTMLCanvasElement) {
+		this.clock = new THREE.Clock();
 
-    const clock = new THREE.Clock();
-    
-    const screenDimensions = {
-        width: window.innerWidth,
-        height: window.innerHeight,
-    }
+		this.screenDimensions = {
+			width: window.innerWidth,
+			height: window.innerHeight,
+		};
 
-    const scene = buildScene();
-    const renderer = buildRender(screenDimensions);
-    const camera = buildCamera(screenDimensions);
-    const controls = buildControls();
-    const sceneSubjects = createSceneSubjects(scene);
-    camera.position.set(-20,20,20);
+		this.scene = this.buildScene();
+		this.renderer = this.buildRender(this.screenDimensions);
+		this.camera = this.buildCamera(this.screenDimensions);
+		this.controls = this.buildControls();
+		this.sceneSubjects = this.createSceneSubjects();
+		this.camera.position.set(-20, 20, 20);
 
+		this.render()
+	}
 
-    function buildScene() {
-        const scene = new THREE.Scene();
-        scene.background = new THREE.Color("#333");
+	createSceneSubjects() {
+		const sceneSubjects = [
+			new GeneralLights(this.scene),
+			new SceneHelpers(this.scene),
+			new Ledstest(this.scene),
+		];
 
-        return scene;
-    }
+		return sceneSubjects;
+	}
 
-    function buildRender({ width, height }) {
-        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true }); 
-        renderer.setSize(width, height);
-        renderer.shadowMap.autoUpdate = false;
-        renderer.shadowMap.enabled = false;
-        renderer.shadowMap.type = THREE.VSMShadowMap
-        renderer.physicallyCorrectLights = true;
-        renderer.outputEncoding = sRGBEncoding
-        renderer.toneMapping = ACESFilmicToneMapping
-        renderer.toneMappingExposure = 1
-        renderer.autoClear = false;
+	buildControls() {
+		const controls = new OrbitControls(this.camera, this.canvas);
+		return controls;
+	}
 
-        //renderer.gammaInput = true;
-        //renderer.gammaOutput = true; 
+	buildCamera({ width, height }) {
+		const aspectRatio = width / height;
+		const fieldOfView = 60;
+		const nearPlane = 1;
+		const farPlane = 1000;
+		const camera = new THREE.PerspectiveCamera(
+			fieldOfView,
+			aspectRatio,
+			nearPlane,
+			farPlane
+		);
 
-        return renderer;
-    }
+		return camera;
+	}
 
-    function buildCamera({ width, height }) {
-        const aspectRatio = width / height;
-        const fieldOfView = 60;
-        const nearPlane = 1;
-        const farPlane = 1000; 
-        const camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
+	buildScene() {
+		const scene = new THREE.Scene();
+		scene.background = new THREE.Color("#333");
 
-        return camera;
-    }
+		return scene;
+	}
 
-    function createSceneSubjects(scene) {
-        const sceneSubjects = [
-            new GeneralLights(scene),
-            new SceneHelpers(scene),
-            new Ledstest(scene)
-        ];
+	buildRender({ width, height }) {
+		const renderer = new THREE.WebGLRenderer({
+			canvas: this.canvas,
+			antialias: true,
+			alpha: true,
+		});
+		renderer.setSize(width, height);
+		renderer.shadowMap.autoUpdate = false;
+		renderer.shadowMap.enabled = false;
+		renderer.shadowMap.type = THREE.VSMShadowMap;
+		renderer.physicallyCorrectLights = true;
+		renderer.outputEncoding = sRGBEncoding;
+		renderer.toneMapping = ACESFilmicToneMapping;
+		renderer.toneMappingExposure = 1;
+		renderer.autoClear = false;
 
-        return sceneSubjects;
-    }
+		return renderer;
+	}
 
-    function buildControls(){
-       const controls = new OrbitControls( camera, canvas);
-       //controls.enableDamping = true
-       return controls;
-    }
+	onWindowResize() {
+		const { width, height } = this.canvas;
+		this.screenDimensions.width = width;
+		this.screenDimensions.height = height;
 
-    
+		this.camera.aspect = width / height;
+		this.camera.updateProjectionMatrix();
 
-    this.update = function() {
-        const elapsedTime = clock.getElapsedTime();
+		this.renderer.setSize(width, height);
+		this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+	}
 
-        for(let i=0; i<sceneSubjects.length; i++)
-        	sceneSubjects[i].update(elapsedTime);
+	update() {
+		const elapsedTime = this.clock.getElapsedTime();
 
-        fpsGraph.begin()
-        renderer.render(scene, camera);
-        fpsGraph.end()
+		for (let i = 0; i < this.sceneSubjects.length; i++)
+			this.sceneSubjects[i].update(elapsedTime);
 
-        controls.update();
+		fpsGraph.begin();
+		this.renderer.render(this.scene, this.camera);
+		fpsGraph.end();
 
-    }
+		this.controls.update();
+	}
 
-    this.onWindowResize = function() {
-        const { width, height } = canvas;
-
-        screenDimensions.width = width;
-        screenDimensions.height = height;
-
-        camera.aspect = width / height;
-        camera.updateProjectionMatrix();
-      
-        renderer.setSize(width, height)
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)) // To avoid performance problems on devices with higher pixel ratio
-    }
-}
-
-const sceneManager = new SceneManager(canvas);
-
-bindEventListeners();
-
-
-function bindEventListeners() {
-	window.onresize = resizeCanvas;
-	resizeCanvas();	
-}
-
-function resizeCanvas() {
-	canvas.style.width = '100%';
-	canvas.style.height= '100%';
+	render() {
+		requestAnimationFrame(() => this.render());
+		this.update();
+	}
 	
-	canvas.width  = window.innerWidth
-	canvas.height = window.innerHeight
-   
-    sceneManager.onWindowResize();
+	// TODO: Remember to add this function to the window on resize event listenr
+	resizeCanvas() {
+		this.canvas.style.width = "100%";
+		this.canvas.style.height = "100%";
+
+		this.canvas.width = window.innerWidth;
+		this.canvas.height = window.innerHeight;
+
+		this.onWindowResize();
+	}
 }
-
-function render() {
-    requestAnimationFrame(render);
-    sceneManager.update();
-}
-
-render();
-
-

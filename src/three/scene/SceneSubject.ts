@@ -2,7 +2,6 @@ import * as THREE from 'three'
 import { gui } from '../core/gui'
 
 export function SceneHelpers(scene) {
-	
 	const ambientLight = new THREE.AmbientLight(0x555555, 0.2)
 	scene.add(ambientLight)
 
