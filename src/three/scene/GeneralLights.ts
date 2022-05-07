@@ -4,7 +4,7 @@ import { SubsurfaceScatteringShader } from "three/examples/jsm/shaders/Subsurfac
 export class GeneralLights {
 	constructor(scene: THREE.Scene) {
 		const loader = new THREE.TextureLoader();
-		const imgTexture = loader.load("../src/three/static/white.jpg");
+		const imgTexture = loader.load("/src/three/static/white.jpg");
 
 		imgTexture.wrapS = imgTexture.wrapT = THREE.RepeatWrapping;
 
