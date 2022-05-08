@@ -4,11 +4,11 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { fpsGraph } from "./core/gui";
 import "./style.css";
 
-
+import './core/helperFunc';
 import { SceneHelpers } from "./scene/SceneSubject";
 import { GeneralLights } from "./scene/GeneralLights";
-import { Ledstest } from "./scene/Leds";
-import { paths } from "./scene/paths";
+import { leds } from "./scene/Leds";
+import { casing } from "./scene/casing";
 
 export default class SceneManager {
 	screenDimensions: { width: number; height: number };
@@ -46,8 +46,8 @@ export default class SceneManager {
 		const sceneSubjects = [
 			new GeneralLights(this.scene),
 			new SceneHelpers(this.scene),
-			new Ledstest(this.scene),
-			new paths(this.scene)
+			new leds(this.scene),
+			new casing(this.scene)
 		];
 
 		return sceneSubjects;
@@ -75,7 +75,7 @@ export default class SceneManager {
 
 	buildScene() {
 		const scene = new THREE.Scene();
-		scene.background = new THREE.Color("#333");
+		scene.background = new THREE.Color("#fff");
 
 		return scene;
 	}

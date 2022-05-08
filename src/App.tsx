@@ -11,9 +11,9 @@ function App() {
 				<Container>
 					<Three_App />
 				</Container>
-				<Container>
+				{/* <Container>
 					<P5JS_App />
-				</Container>
+				</Container> */}
 			</header>
 		</div>
 	);

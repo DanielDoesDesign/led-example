@@ -1,6 +1,7 @@
-import * as THREE from "three";
+  import * as THREE from "three";
 import { SubsurfaceScatteringShader } from "three/examples/jsm/shaders/SubsurfaceScatteringShader.js";
 import imgUrl from '/src/three/static/white.jpg'
+import { loadedData } from '../core/helperFunc'
 
 export class GeneralLights {
 	constructor(scene: THREE.Scene) {
@@ -32,15 +33,45 @@ export class GeneralLights {
 
 		// LOADER
 
-		const geoPlane = new THREE.PlaneGeometry(300, 300);
+		const geoPlane = createOut(3);
 		//const matPlane = new THREE.MeshStandardMaterial();
 		//matPlane.side = THREE.DoubleSide;
 		const mshPlane = new THREE.Mesh(geoPlane, material);
 		mshPlane.receiveShadow = true;
 
 		scene.add(mshPlane);
-		mshPlane.position.set(150, 150, 0);
+
+		function createOut(d) {
+
+			let data = loadedData();
+			let points = data.outLines;
+
+			const newDiffuse = new THREE.Shape();
+		
+			newDiffuse.moveTo(points[0].x, points[0].y);
+
+			for (let i = 0; i < points.length; i++) {
+				newDiffuse.lineTo(points[i].x,points[i].y);
+			}
+	
+			const wallSettings = {
+				steps: 1,
+				depth: d,
+				bevelEnabled: false
+			};
+	
+			const geoPlane = new THREE.ExtrudeGeometry(newDiffuse, wallSettings);
+	
+			return geoPlane;
+		}
+
+
+
+
 	}
+
+
+
 
 	update(time) { }
 }
