@@ -41,7 +41,7 @@ export function casing(scene) {
 
 
 
-	const flip = true;
+	let flip = true;
 
 	const pcbWorldPos = 50;
 	const pcbToShine = 2;
@@ -50,15 +50,15 @@ export function casing(scene) {
 
 	let diffuserWorldPos, shroudWorldPos, shineWorldPos;
 
-	if (flip == false) {
+	//if (flip == false) {
 		diffuserWorldPos = pcbWorldPos + pcbToDiffuser;
 		shroudWorldPos = diffuserWorldPos - shroudHeight;
 		shineWorldPos = pcbWorldPos + pcbToShine;
-	} else if (flip == true) {
-		diffuserWorldPos = pcbWorldPos - pcbToDiffuser;
-		shroudWorldPos = diffuserWorldPos;
-		shineWorldPos = pcbWorldPos - pcbToShine;
-	}
+	//} else {
+	//	diffuserWorldPos = pcbWorldPos - pcbToDiffuser;
+	//	shroudWorldPos = diffuserWorldPos;
+	//	shineWorldPos = pcbWorldPos - pcbToShine;
+	//}
 
 	for (let i = 0; i < lines.length; i++) {
 		const geoNewWall = createWall(lines[i], 1.2, shroudHeight);
