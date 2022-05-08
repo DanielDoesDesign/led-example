@@ -5,7 +5,7 @@ export function casing(scene) {
 
 	let walls = [];
 	let data = loadedData();
-	let lines =	data.inLines;
+	let inlines = data.inLines;
 
 	function createWall(l, t, d) {
 
@@ -51,17 +51,17 @@ export function casing(scene) {
 	let diffuserWorldPos, shroudWorldPos, shineWorldPos;
 
 	//if (flip == false) {
-		diffuserWorldPos = pcbWorldPos + pcbToDiffuser;
-		shroudWorldPos = diffuserWorldPos - shroudHeight;
-		shineWorldPos = pcbWorldPos + pcbToShine;
+	//	diffuserWorldPos = pcbWorldPos + pcbToDiffuser;
+	//	shroudWorldPos = diffuserWorldPos - shroudHeight;
+	//	shineWorldPos = pcbWorldPos + pcbToShine;
 	//} else {
-	//	diffuserWorldPos = pcbWorldPos - pcbToDiffuser;
-	//	shroudWorldPos = diffuserWorldPos;
-	//	shineWorldPos = pcbWorldPos - pcbToShine;
+		diffuserWorldPos = pcbWorldPos - pcbToDiffuser;
+		shroudWorldPos = diffuserWorldPos;
+		shineWorldPos = pcbWorldPos - pcbToShine;
 	//}
 
-	for (let i = 0; i < lines.length; i++) {
-		const geoNewWall = createWall(lines[i], 1.2, shroudHeight);
+	for (let i = 0; i < inlines.length; i++) {
+		const geoNewWall = createWall(inlines[i], 1.2, shroudHeight);
 		const matNewWall = new THREE.MeshStandardMaterial({ color: 0x00ff000 });
 		const meshNewWall = new THREE.Mesh(geoNewWall, matNewWall);
 		//	meshNewWall.scale.set (worldScale, worldScale, worldScale);
@@ -73,6 +73,8 @@ export function casing(scene) {
 		walls[i].position.set(0, 0, -shroudWorldPos)
 		scene.add(walls[i]);
 	}
+
+	console.log(walls)
 
 
 	this.update = function (time) {

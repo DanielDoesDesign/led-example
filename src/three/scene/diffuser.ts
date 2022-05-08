@@ -3,7 +3,7 @@ import { SubsurfaceScatteringShader } from "three/examples/jsm/shaders/Subsurfac
 import imgUrl from '/src/three/static/white.jpg'
 import { loadedData } from '../core/helperFunc'
 
-export class GeneralLights {
+export class diffuser {
 	constructor(scene: THREE.Scene) {
 		const loader = new THREE.TextureLoader();
 		const imgTexture = loader.load(imgUrl);
@@ -33,10 +33,11 @@ export class GeneralLights {
 
 		// LOADER
 
-		const geoPlane = createOut(3);
-		//const matPlane = new THREE.MeshStandardMaterial();
-		//matPlane.side = THREE.DoubleSide;
-		const mshPlane = new THREE.Mesh(geoPlane, material);
+		const geoPlane = createOut(1);
+		const matPlane = new THREE.MeshStandardMaterial();
+		matPlane.side = THREE.DoubleSide;
+		const mshPlane = new THREE.Mesh(geoPlane, material);		//SubSurface Scattering Material
+		//const mshPlane = new THREE.Mesh(geoPlane, matPlane);		//Standard Material
 		mshPlane.receiveShadow = true;
 
 		scene.add(mshPlane);

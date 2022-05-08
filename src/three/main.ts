@@ -6,7 +6,7 @@ import "./style.css";
 
 import './core/helperFunc';
 import { SceneHelpers } from "./scene/SceneSubject";
-import { GeneralLights } from "./scene/GeneralLights";
+import { diffuser } from "./scene/diffuser";
 import { leds } from "./scene/Leds";
 import { casing } from "./scene/casing";
 
@@ -44,7 +44,7 @@ export default class SceneManager {
 
 	createSceneSubjects() {
 		const sceneSubjects = [
-			new GeneralLights(this.scene),
+			new diffuser(this.scene),
 			new SceneHelpers(this.scene),
 			new leds(this.scene),
 			new casing(this.scene)
@@ -62,7 +62,7 @@ export default class SceneManager {
 		const aspectRatio = width / height;
 		const fieldOfView = 60;
 		const nearPlane = 1;
-		const farPlane = 1000;
+		const farPlane = 2000;
 		const camera = new THREE.PerspectiveCamera(
 			fieldOfView,
 			aspectRatio,
@@ -75,7 +75,7 @@ export default class SceneManager {
 
 	buildScene() {
 		const scene = new THREE.Scene();
-		scene.background = new THREE.Color("#fff");
+		scene.background = new THREE.Color("#888");
 
 		return scene;
 	}
