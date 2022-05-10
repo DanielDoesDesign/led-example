@@ -45,11 +45,11 @@ export function leds(scene) {
 		const newSpot = new THREE.SpotLight();
 		newSpot.position.set(0, 0, (mshLed.position.z + ledThickness / 2) + lightOffset);
 		newSpot.distance = 50;
-		newSpot.angle = 1;
+		newSpot.angle = 0.88;
 		newSpot.intensity = 10;
-		newSpot.penumbra = 0.8;
+		newSpot.penumbra = 0.23;
 		//newSpot.matrixAutoUpdate = false;
-		newSpot.castShadow = true;
+		//newSpot.castShadow = true;
 
 		var r = () => Math.random() * 256 >> 0;
 		var color = `rgb(${r()}, ${r()}, ${r()})`;
@@ -59,7 +59,7 @@ export function leds(scene) {
 		localLed.add(newSpot);
 
 		const localAxes = new THREE.AxesHelper(5);
-		localLed.add(localAxes);
+		//localLed.add(localAxes);
 
 		const ledHelper = new THREE.SpotLightHelper(newSpot);
 		ledHelper.visible = false;
@@ -77,16 +77,7 @@ export function leds(scene) {
 		createLED(leds[i].x, leds[i].y, 30)
 	}
 
-
-
-	var randX = () => Math.random() * 100 >> 0;
-
-	//for (let i = 0; i < 30; i++) {
-	//	createLED(randX(), randX(), 30);
-	//}
-
-
-	ledGroup.position.z = 0;
+	ledGroup.position.z = 3;
 	ledGroup.position.x = 0;
 	ledGroup.position.y = 0;
 

@@ -13,11 +13,14 @@ class P5JS_App extends Component {
 	ch: number
 	walls: Boundary[]
 	particle: any[]
-	curser: number
+	curser: pointer
 	nodes: any[]
 	createMode: boolean
 	sw: number
 	sh: number
+	selectedObj: object
+	offsetX: number
+	offsetY: number
 
 	constructor(props) {
 		super(props);
@@ -27,11 +30,13 @@ class P5JS_App extends Component {
 		this.ch = 600;
 		this.walls = [];
 		this.particle = [];
-		this.curser = 0;
+		this.curser = null;
 		this.nodes = [];
 		this.createMode = false;
 		this.sw = this.cw; //sketch width
 		this.sh = this.ch; //sketch height
+		this.offsetX = 0;
+		this.offsetY = 0;
 	}
 
 	setup(p5: any, parent: Element) {
@@ -39,12 +44,12 @@ class P5JS_App extends Component {
 		p5.colorMode(p5.HSB, 360, 100, 100);
 		p5.ellipseMode(p5.RADIUS);
 
-		//this.walls.push(new Boundary(p5, 0 , 0 , this.sw, 0))
-		//this.walls.push(new Boundary(p5, this.sw, 0 , this.sw, this.sh))
-		//this.walls.push(new Boundary(p5, this.sw, this.sh, 0 , this.sh))
-		//this.walls.push(new Boundary(p5, 0 , this.sh, 0 , 0))
+		this.walls.push(new Boundary(p5, 0 , 0 , this.sw, 0))
+		this.walls.push(new Boundary(p5, this.sw, 0 , this.sw, this.sh))
+		this.walls.push(new Boundary(p5, this.sw, this.sh, 0 , this.sh))
+		this.walls.push(new Boundary(p5, 0 , this.sh, 0 , 0))
 
-		//this.curser = new pointer();
+		this.curser = new pointer(p5);
 	};
 
 	drawGrid(p5: P5, sizX: number, sizY: number, spcX: number, spcY: number) {
@@ -65,6 +70,46 @@ class P5JS_App extends Component {
 		p5.fill(255);
 		p5.translate(50, -50);
 		this.drawGrid(p5, 600, 600, 100, 100);
+/*
+		if(this.curser.selectedObj){
+			console.log(selectedObj.name)
+			}
+			 
+			for (let i = 0; i < 5; i++) {
+			curser.collide(nodes[i]);
+			nodes[i].show()
+			}
+			  
+			 */ 
+			for (let i = 0; i < this.particle.length; i++) {
+			  this.particle[i].look(this.walls)
+			this.particle[i].show()
+			}
+			
+		  
+			//particle[1].look(walls)
+			this.particle[0].update(p5.mouseX-this.offsetX, p5.mouseY+this.offsetY)
+		  
+			
+			for (let wall of this.walls) {
+			  wall.show(p5)
+			}
+			
+		  
+			
+			this.curser.update(p5.mouseX-this.offsetX, p5.mouseY+this.offsetY)
+			this.curser.show(p5)
+		   
+		  
+			/*
+			if (keyIsDown(SHIFT)) {
+			createMode = true
+			} else {createMode = false}
+			
+			console.log(createMode)
+			*/
+
+
 	};
 
 	render() {
@@ -72,17 +117,15 @@ class P5JS_App extends Component {
 			<div>
 				<Ratio
 					aspectRatio="4x3"
-					className="border border-5 rounded rounded-3"
-				>
+					className="border border-5 rounded rounded-3">
 					<Sketch
 						setup={(p5, parent) => this.setup(p5, parent)}
 						draw={(p5) => this.draw(p5)}
-						className="w-100 h-100"
-					/>
+						className="w-100 h-100"/>
 				</Ratio>
-				;
+				
 			</div>
-		);
+		)
 		
 	}
 }

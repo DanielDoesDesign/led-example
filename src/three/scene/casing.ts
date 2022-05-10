@@ -1,11 +1,13 @@
- import * as THREE from 'three'
- import { loadedData } from '../core/helperFunc'
+import * as THREE from 'three'
+import { loadedData } from '../core/helperFunc'
+import SceneManager from '../main'
 
 export function casing(scene) {
 
 	let walls = [];
 	let data = loadedData();
 	let inlines = data.inLines;
+	let outLines = data.outLines;
 
 	function createWall(l, t, d) {
 
@@ -55,17 +57,18 @@ export function casing(scene) {
 	//	shroudWorldPos = diffuserWorldPos - shroudHeight;
 	//	shineWorldPos = pcbWorldPos + pcbToShine;
 	//} else {
-		diffuserWorldPos = pcbWorldPos - pcbToDiffuser;
-		shroudWorldPos = diffuserWorldPos;
-		shineWorldPos = pcbWorldPos - pcbToShine;
+	diffuserWorldPos = pcbWorldPos - pcbToDiffuser;
+	shroudWorldPos = diffuserWorldPos;
+	shineWorldPos = pcbWorldPos - pcbToShine;
 	//}
 
 	for (let i = 0; i < inlines.length; i++) {
 		const geoNewWall = createWall(inlines[i], 1.2, shroudHeight);
-		const matNewWall = new THREE.MeshStandardMaterial({ color: 0x00ff000 });
+		//const matNewWall = new THREE.MeshBasicMaterial({ color: 0x333333 });
+		const matNewWall = new THREE.MeshStandardMaterial({ color: 0x111111 });
 		const meshNewWall = new THREE.Mesh(geoNewWall, matNewWall);
 		//	meshNewWall.scale.set (worldScale, worldScale, worldScale);
-		meshNewWall.castShadow = true;
+		//meshNewWall.castShadow = true;
 		walls.push(meshNewWall)
 	}
 
@@ -74,9 +77,33 @@ export function casing(scene) {
 		scene.add(walls[i]);
 	}
 
-	console.log(walls)
+	let centroidx, centroidy;
 
+	function findCentre(array) {
+		let sumx = 0;
+		let sumy = 0;
+		//find centroid of line array, change this to points when working
+		for (let i = 0; i < array.length; i++) {
+			sumx += array[i].x;
+			sumy += array[i].y;
+		}
+		centroidx = sumx / array.length;
+		centroidy = sumy / array.length;
+	}
+
+	findCentre(outLines);
+
+	console.log(centroidx, centroidy)
+
+	const geoCentre = new THREE.SphereGeometry(10,8,8);
+	const matCentre = new THREE.MeshStandardMaterial({ color: 0xffffff });
+	const mshCentre = new THREE.Mesh(geoCentre, matCentre);
+
+	//scene.add(mshCentre);
+	mshCentre.position.set(centroidx, centroidy,0);
 
 	this.update = function (time) {
+
+		//SceneManager.controls.target = mshCentre;
 	}
 }

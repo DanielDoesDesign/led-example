@@ -1,15 +1,24 @@
+import type P5 from "p5/index"
+import { Vector } from "p5"
+
 class Ray {
+
+  pos: Vector
+  dir: Vector
+  x: number
+  y: number 
+
   constructor(pos, angle) {
     this.pos = pos
-    this.dir = p5.Vector.fromAngle(angle)
+    this.dir = Vector.fromAngle(angle)
   }
   
-  show() {
-    p5.stroke(255)
-    p5.push()
-    p5.translate(this.pos.x, this.pos.y)
-    p5.line(0, 0, this.dir.x * 50, this.dir.y * 50)
-    p5.pop()
+  show(p) {
+    p.stroke(255)
+    p.push()
+    p.translate(this.pos.x, this.pos.y)
+    p.line(0, 0, this.dir.x * 50, this.dir.y * 50)
+    p.pop()
   }
   
   lookAt(x, y) {
@@ -21,7 +30,7 @@ class Ray {
   
   //modify this to look for circles?
   
-  cast(wall) {
+  cast(p, wall) {
     
     //wall points
     const x1 = wall.a.x
@@ -49,7 +58,7 @@ class Ray {
     const u = - (u1 - u2) / den
     
     if (t > 0 && t < 1 && u > 0) {
-      const pt = createVector()
+      const pt = p.createVector()
       pt.x = x1 + t * (x2 - x1)
       pt.y = y1 + t * (y2 - y1)
       return pt

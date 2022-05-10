@@ -1,6 +1,15 @@
 let selectedObj = null;
+import { Color, Vector } from "p5/index"
+import {collideCircleCircle, collidePointCircle} from "p5.collide2d"
 
 export class pointer{
+
+  pos: Vector
+  d: number
+  pressed: boolean
+  overlap: boolean
+  hit: boolean
+
    constructor(p) {
     this.pos = p.createVector(0, 0)
     this.d = 5;
@@ -60,12 +69,20 @@ export class pointer{
 }
 
 export class node{
-   constructor(x, y, n){
-    this.pos = createVector(x, y)
+
+  pos: Vector
+  d: number
+  overlap: boolean
+  selected: boolean
+  color: Color
+  name: string
+  
+   constructor(p, x, y, n){
+    this.pos = p.createVector(x, y)
     this.d = 20;
     this.overlap = false;
     this.selected = false;
-    this.color = color(100);
+    this.color = p.color(100);
     this.name = n
    }
 
@@ -73,12 +90,12 @@ export class node{
     this.pos.set(x, y)
   }
 
-  clicked() {
-    this.color = color(255); //set this node to be white if clicked
+  clicked(p) {
+    this.color = p.color(255); //set this node to be white if clicked
     this.selected = true;
   }
 
-  show() {
+  show(p) {
     
     
     /*
@@ -126,14 +143,14 @@ export class node{
 
     p.strokeWeight(3);
     p.fill(this.color);
-    p.stroke(this.overlap ? color("red") : 1);
+    p.stroke(this.overlap ? p.color("red") : 1);
     this.overlap = false
     p.circle(this.pos.x, this.pos.y, this.d/2);
     
   if(selectedObj == this){
       p.fill(255);
       p.textSize(15);
-      p.textAlign(CENTER);
+      p.textAlign(p.CENTER);
       p.text(this.name, this.pos.x,this.pos.y -50)
      
     

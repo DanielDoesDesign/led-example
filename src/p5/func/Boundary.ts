@@ -1,4 +1,12 @@
+import type P5 from "p5/index"
+import { Vector } from "p5/index"
+
 export class Boundary {
+
+  a: Vector
+  b: Vector
+  x: number
+  y: number
 
   constructor(p, x1, y1, x2, y2) {
     this.a = p.createVector(x1, p.sw-y1)

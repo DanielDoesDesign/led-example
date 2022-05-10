@@ -1,16 +1,26 @@
 //Essentially the "LED" class
 
+import type P5 from "p5/index"
+import { Color, Vector } from "p5"
+
 export class Particle {
-  constructor(x, y) {
-    this.pos = createVector(x, y)
+  pos: Vector
+  rays: any[]
+  ptsX: any[]
+  ptsY: any[]
+  rad: number
+  col: Color
+
+  constructor(p, x, y) {
+    this.pos = p.createVector(x, y)
     this.rays = []
     this.ptsX = []
     this.ptsY = []
     this.rad = 20
-    this.col = color(random(255),random(255),random(255))
+    this.col = p.color(p.random(255),p.random(255),p.random(255))
     let rays = 100
     for (let a = 0; a < 359.9; a += 360 / rays) {
-      this.rays.push(new Ray(this.pos, radians(a)))
+      this.rays.push(new p.Ray(p, this.pos, p.radians(a)))
     }
   }
   
@@ -21,7 +31,7 @@ export class Particle {
   
   //add in check if ray hits wall, or if it hits circle first, stop at circle, otherwise stop at wall
   
-  look(walls) {
+  look(p, walls) {
     
     this.ptsX = []
     this.ptsY = []
@@ -34,7 +44,7 @@ export class Particle {
     for (let wall of walls) {
       let pt = ray.cast(wall)   // check if cast hits a wall at all
       if (pt) {                  //if larger than 0 (true)
-        let d = p5.Vector.dist(this.pos, pt)  //distance to point intersection?
+        let d = p.Vector.dist(this.pos, pt)  //distance to point intersection?
         if (d < record) {  //if distance is smaller than "recorded smallest collision"
           closest = pt
           record = d
@@ -47,13 +57,13 @@ export class Particle {
         let d = this.pos.dist(closest)
         if (d >= this.rad){
             closest.sub(this.pos)
-            let angle = atan2(closest.y, closest.x)
-            closest = p5.Vector.fromAngle(angle)
+            let angle = p.atan2(closest.y, closest.x)
+            closest = p.Vector.fromAngle(angle)
             closest.mult(this.rad)
             closest.add(this.pos)
           }
-        stroke(255)
-        strokeWeight(0.5)
+        p.stroke(255)
+        p.strokeWeight(0.5)
      //   line(this.pos.x, this.pos.y, closest.x, closest.y) //display rays
         
         this.ptsX.push(closest.x)
@@ -63,28 +73,28 @@ export class Particle {
     }
   }
   
-  show() {
-  noStroke()
+  show(p) {
+  p.noStroke()
 
         
   for (let x = 0; x <= this.rad; x += 4) {
-  drawGradient(x, this.rad / 2);
+  p.drawGradient(x, this.rad / 2);
   }
     
-  beginShape();
+  p.beginShape();
   for (let i = 0; i < this.ptsX.length; i += 1) {
-  vertex(this.ptsX[i], this.ptsY[i])
+  p.vertex(this.ptsX[i], this.ptsY[i])
   }
-  endShape(CLOSE);
+  p.endShape(p.CLOSE);
     
     
     
-    stroke(255,0,0)
-    strokeWeight(1)
+    p.stroke(255,0,0)
+    p.strokeWeight(1)
    // ellipse(this.pos.x, this.pos.y, this.rad*2)
-    fill(255)
-    rectMode(CENTER)
-    rect(this.pos.x, this.pos.y, 5, 5)
+    p.fill(255)
+    p.rectMode(p.CENTER)
+    p.rect(this.pos.x, this.pos.y, 5, 5)
     
     
 
@@ -97,13 +107,13 @@ export class Particle {
   }
 }
 
-function drawGradient(x, y, dim) {
+function drawGradient(p, x, y, dim) {
   let radius = dim / 2;
-  let h = random(0, 360);
+  let h = p.random(0, 360);
   let a = 0;
   for (let r = this.rad; r > 0; --r) {
-    fill(h, 90, a);
-    ellipse(x, y, r, r);
+    p.fill(h, 90, a);
+    p.ellipse(x, y, r, r);
     h = (h + 1) % 360;
     a = (a + 5)
   }
