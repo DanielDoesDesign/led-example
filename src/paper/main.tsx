@@ -9,8 +9,12 @@ const Paper_App = props => {
   useEffect(() => {
     const canvas = canvasRef.current;
     Paper.setup(canvas);
+
     draw1();
+
   }, []);
+
+
   
   return <canvas ref={canvasRef} {...props} id="canvas" resize="true" />
 }
