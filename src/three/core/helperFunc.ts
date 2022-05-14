@@ -1,5 +1,5 @@
-import bear from "../objects/bear.js"
-import test from "../objects/unicorn.js"
+//import test from "../objects/bear.js"
+import test from "../../objects/unicorn.js"
 
 export class Point {
     x: number;
@@ -131,10 +131,5 @@ class data {
             newData.loadinLines();
             newData.loadoutLines();
             newData.loadLeds();
-
-            console.log(newData.leds);
-
-
-
             return newData
         } 

@@ -74,7 +74,7 @@ export function casing(scene) {
 
 	for (let i = 0; i < walls.length; i++) {
 		walls[i].position.set(0, 0, -shroudWorldPos)
-		scene.add(walls[i]);
+		//scene.add(walls[i]);
 	}
 
 	let centroidx, centroidy;
