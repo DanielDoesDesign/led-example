@@ -69,32 +69,36 @@
       var newOffset = PaperOffset.offset(samplePath, lineThick)
       newOffset.strokeColor = 'black';
       newOffset.strokeWidth = 1;
-      newOffset.locked = true;
       newOffset.name = 'offset';
 
-
       offsetSample.addChild(samplePath);
-
       offsetSample.addChild(newOffset);
 
-      function deleteChildren(items) {
-        for (let i = 0; i < items.length; i++) {
-          items[i].children['offset'].remove();
-        }
+
+
+
+      function deleteChildren(item) {
+        console.log("deleting children " + item.children);
+        item.children.forEach(i => {
+          if (i.name === "pocket")
+            i.remove();
+        });
       }
 
-      function createOffsetAgain(items) {
+      function createOffsetAgain(item) {
+        console.log("creating item " + item.children[0]);
+        var newOffset = PaperOffset.offset(item.children[0], -10)
+        newOffset.strokeColor = 'black';
+        newOffset.fillColor = 'white';
+        newOffset.strokeWidth = 1;
 
-        for (let i = 0; i < items.length; i++) {
-          var newOffset = PaperOffset.offset(items[i], -10)
-          newOffset.strokeColor = 'black';
-          newOffset.strokeWidth = 1;
-          newOffset.locked = true;
-          newOffset.name = 'offset';
+        //var clipping = PaperOffset.offset(newOffset, 1)
 
-          var newGroup = items[i].parent;
-          newGroup.addChild(newOffset);
-        }
+        var newGroup = paper.Group(newOffset);
+        //newGroup.clipped = true;
+        newGroup.name = "pocket";
+
+        item.addChild(newGroup);
 
 
       }
@@ -147,26 +151,19 @@
       //globalSelected[0] = p1.segments[0].point;
 
       var f1 = PaperOffset.offset(p1, -5)
-      // f1.locked = true;
-
       var f2 = PaperOffset.offset(p2, -5)
-      // f2.locked = true;
 
-      var c1 = PaperOffset.offset(f1, 0);
-      f1.name = 'offset';
-      f2.name = 'offset';
-
-      var c2 = PaperOffset.offset(f2, 0);
-
-
-      // c1.locked = true;
-      // c2.locked = true;
+      var c1 = PaperOffset.offset(f1, 1);
+      var c2 = PaperOffset.offset(f2, 1);
 
       var testGroup = new paper.Group([c1, f1])
       testGroup.clipped = true;
+      testGroup.name = 'pocket';
 
       var testGroup2 = new paper.Group([c2, f2])
       testGroup2.clipped = true;
+
+      var testGroup3 = new paper.Group(p1, testGroup)
 
 
       f2.fillColor = 'lightgrey';
@@ -339,11 +336,12 @@
             // puts selected items into an array
             selectedItems = paper.project.activeLayer.getItems({ selected: true });
 
-            //console.log(groupItems[0]);
-
+            console.log("selected Items " + selectedItems)
             for (let i = 0; i < selectedItems.length; i++) {
-              deleteChildren(selectedItems[i].parent);
+              //deleteChildren(selectedItems[i]);
             }
+
+            deleteChildren(selectedItems[0].parent);
 
             //globalSelected = hit;
             if (globalSelected[0] != null) {
@@ -356,8 +354,10 @@
         }
 
         tool.onMouseUp = function (event) {
+          for (let i = 0; i < selectedItems.length; i++) {
+            createOffsetAgain(selectedItems[i]);
+          }
 
-          createOffsetAgain(selectedItems)
 
         }
 
