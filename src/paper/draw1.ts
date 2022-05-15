@@ -34,17 +34,17 @@ const draw1 = () => {
 
 
 
-   // var testGroup = new Group({});
+    // var testGroup = new Group({});
 
     //inner lines have start/end line references
     var myInPath = new Paper.Path();
     myInPath.strokeColor = new Paper.Color('red')
     for (let i = 0; i < inLines.length; i++) {
         var from = new Point(inLines[i][0], inLines[i][1]);
-        var to = new Point(inLines[i][2],inLines[i][3])
-        var newLine = new Paper.Path.Line(from,to)
-     //   testGroup.addChild(newLine);
-        }
+        var to = new Point(inLines[i][2], inLines[i][3])
+        var newLine = new Paper.Path.Line(from, to)
+        //   testGroup.addChild(newLine);
+    }
 
 
     var star = new Paper.Path.Star({
@@ -63,7 +63,7 @@ const draw1 = () => {
 
 
     // Create a group of the two items and clip it:
-    var group = new Paper.Group(circle, star);
+    var group = new Paper.Group([circle, star]);
     group.clipped = true;
 
     Paper.view.viewSize.width = 600;

@@ -10,7 +10,8 @@
 
 <body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.15/paper-core.js"></script>
-  <script type="text/javascript" src="node_modules/paperjs-offset/demo/paperjs-offset.js"></script>
+  <script type="module" src="node_modules/paperjs-offset/demo/paperjs-offset.js"></script>
+  <script type="javascript" src="src/objects/uni_poly.js"></script>
 
   <button class="tool-button" data-tool-name="toolPath">
     Draw Paths
@@ -28,6 +29,8 @@
     Move Points
   </button>
 
+
+
   <canvas resize></canvas>
 
   <script>
@@ -41,6 +44,8 @@
       var topleft = 30;
       var bottomright = 400;
 
+      var mouse = new paper.Point;
+
 
 
       // Create path.
@@ -53,30 +58,48 @@
           [520, 250]
         ],
         strokeColor: 'red',
-        strokeWidth: 2
+        strokeWidth: 5
       });
 
 
-      var lineThick = 5;
+      var lineThick = 15;
 
       var offsetSample = new paper.Group;
 
       var newOffset = PaperOffset.offset(samplePath, lineThick)
       newOffset.strokeColor = 'black';
       newOffset.strokeWidth = 1;
+      newOffset.locked = true;
+      newOffset.name = 'offset';
+
 
       offsetSample.addChild(samplePath);
+
       offsetSample.addChild(newOffset);
 
+      function deleteChildren(items) {
+        for (let i = 0; i < items.length; i++) {
+          items[i].children['offset'].remove();
+        }
+      }
 
-      function updatePath() {
+      function createOffsetAgain(items) {
 
+        for (let i = 0; i < items.length; i++) {
+          var newOffset = PaperOffset.offset(items[i], -10)
+          newOffset.strokeColor = 'black';
+          newOffset.strokeWidth = 1;
+          newOffset.locked = true;
+          newOffset.name = 'offset';
 
+          var newGroup = items[i].parent;
+          newGroup.addChild(newOffset);
+        }
 
-        //newOffset = PaperOffset.offset(samplePath, lineThick)
 
       }
 
+      //newOffset.remove();
 
 
 
@@ -84,6 +107,7 @@
 
 
       var globalSelected;
+      var selectedItems;
 
 
       var selectCircle = new paper.Path.Circle(new paper.Point(600, 600), 10);
@@ -99,33 +123,19 @@
       outpath.closePath();
 
       //let offset1 = PaperOffset.offset(outpath, 5)
-      PaperOffset.offsetStroke(outpath, 5)
+      PaperOffset.offsetStroke(outpath, 3)
 
-      var p4 = new paper.Path();
-      p4.strokeColor = 'black';
-      p4.add(new paper.Point(51, 81));
-      p4.add(new paper.Point(51, 379));
-      p4.add(new paper.Point(349, 379));
-      p4.closePath();
-      p4.fillColor = 'white';
+
+
+
+
 
       var p1 = new paper.Path();
       p1.strokeColor = 'black';
-      p1.add(new paper.Point(50, 80));
+      p1.add(new paper.Point(50, 50));
       p1.add(new paper.Point(50, 380));
-      p1.add(new paper.Point(350, 380));
+      p1.add(new paper.Point(380, 380));
       p1.closePath();
-
-
-
-
-      var p3 = new paper.Path();
-      p3.strokeColor = 'black';
-      p3.add(new paper.Point(51, 51));
-      p3.add(new paper.Point(379, 51));
-      p3.add(new paper.Point(379, 379));
-      p3.closePath();
-      p3.fillColor = 'white';
 
       var p2 = new paper.Path();
       p2.strokeColor = 'black';
@@ -134,36 +144,36 @@
       p2.add(new paper.Point(380, 380));
       p2.closePath();
 
-      var g1 = new paper.Group([p1, p4]);
-      g1.clipped = true;
-      g1.children[0].visible = true;
-      console.log(g1.children[0])
+      //globalSelected[0] = p1.segments[0].point;
 
-      var g2 = new paper.Group([p2, p3]);
-      g2.clipped = true;
+      var f1 = PaperOffset.offset(p1, -5)
+      // f1.locked = true;
 
-      var leds = new paper.Group();
+      var f2 = PaperOffset.offset(p2, -5)
+      // f2.locked = true;
 
-      //  g1.onMouseEnter = function (event) {
-      // this.selected = true;
-      // }
+      var c1 = PaperOffset.offset(f1, 0);
+      f1.name = 'offset';
+      f2.name = 'offset';
 
-      //  g1.onMouseLeave = function (event) {
-      // this.selected = false;
-      //  }
-
-      //  g2.onMouseEnter = function (event) {
-      // this.selected = true;
-      //  }
-
-      // g2.onMouseLeave = function (event) {
-      // this.selected = false;
-      //  }
+      var c2 = PaperOffset.offset(f2, 0);
 
 
-      function onMouseMove(event) {
-        var mouse = event.point;
-      }
+      // c1.locked = true;
+      // c2.locked = true;
+
+      var testGroup = new paper.Group([c1, f1])
+      testGroup.clipped = true;
+
+      var testGroup2 = new paper.Group([c2, f2])
+      testGroup2.clipped = true;
+
+
+      f2.fillColor = 'lightgrey';
+      f1.fillColor = 'lightgrey';
+
+
+
 
       var hitOptions = {
         segments: false,
@@ -172,47 +182,16 @@
         tolerance: 5
       };
 
-      function onFrame(event) {
-
-      }
 
       var CornerOptions = {
         segments: true,
-        stroke: true,
+        stroke: false,
         fill: false,
         tolerance: 5
       };
 
 
-      function updateGroupPositions() {
-        // update the gr
-
-
-      }
-
-
-
-
-
-
       function getSelectedThing(item) {
-
-        //if group, get path from group and then reassign "item"
-
-        if (item.getClassName() === 'Group') {
-          console.log("this is a group!");
-          var childIndex = item.children[0];
-          //item.childen[0].selected = true;
-          //item = childIndex;
-          //console.log(item.id);
-
-          for (var i = 0, l = childIndex.segments.length; i < l; i++) {
-            if (childIndex.segments[i].selected) {
-              return childIndex.segments[i];
-            }
-          }
-        }
-
 
         // Only check curves and segments if item is a path.
         if (item.getClassName() === 'Path') {
@@ -341,51 +320,95 @@
           // ...only select what was clicked.
 
           //clear selected from all other objects?
-          globalSelected = null;
+          globalSelected = [];
           paper.project.deselectAll();
           selectCircle.visible = false;
 
+          hit = paper.project.hitTestAll(event.point, CornerOptions);
 
 
-          hit = paper.project.hitTest(event.point, CornerOptions);
-          if (hit && hit.location) {
-            hit.location.curve.selected = true;
+          if (hit) {
+
+            for (let i = 0; i < hit.length; i++) {
+              hit[i].segment.selected = true;
+            }
+
+            // puts segments into global array
+            globalSelected = paper.project.activeLayer.getItems({ selected: true }).map(getSelectedThing)
+
+            // puts selected items into an array
+            selectedItems = paper.project.activeLayer.getItems({ selected: true });
+
+            //console.log(groupItems[0]);
+
+            for (let i = 0; i < selectedItems.length; i++) {
+              deleteChildren(selectedItems[i].parent);
+            }
+
+            //globalSelected = hit;
+            if (globalSelected[0] != null) {
+              selectCircle.visible = true;
+              selectCircle.position = globalSelected[0].point;
+            }
           }
-          else if (hit && hit.segment) {
-            hit.segment.selected = true;
-            globalSelected = paper.project.activeLayer.getItems({ selected: true }).map(getSelectedThing)[0]
-            selectCircle.visible = true;
-            selectCircle.position = globalSelected.point;
-          }
 
-          console.log(globalSelected)
+          // console.log(globalSelected)
+        }
+
+        tool.onMouseUp = function (event) {
+
+          createOffsetAgain(selectedItems)
+
+        }
+
+        tool.onMouseDrag = function (event) {
+          if (globalSelected[0] != null) {
+            for (let i = 0; i < globalSelected.length; i++) {
+              globalSelected[i].point = event.point;
+            }
+            selectCircle.position = globalSelected[0].point;
+          }
         }
 
 
-        tool.onMouseDrag = function (event) {
-          if (globalSelected != null) {
-            globalSelected.point = event.point;
-            selectCircle.position = globalSelected.point;
-            updatePath();
-          }
+        tool.onMouseMove = function (event) {
+          mouse.point = event.point;
         }
 
         tool.onKeyDown = function (event) {
 
           if (event.key == 'a') {
-            globalSelected.point.x -= moveAmount;
+            for (let i = 0; i < globalSelected.length; i++) {
+              globalSelected[i].point.x -= moveAmount;
+              selectCircle.position = globalSelected[0].point;
+            }
           };
           if (event.key == 'd') {
-            globalSelected.point.x += moveAmount;
+            for (let i = 0; i < globalSelected.length; i++) {
+              globalSelected[i].point.x += moveAmount;
+              selectCircle.position = globalSelected[0].point;
+            }
           };
           if (event.key == 'w') {
-            globalSelected.point.y -= moveAmount;
+            for (let i = 0; i < globalSelected.length; i++) {
+              globalSelected[i].point.y -= moveAmount;
+              selectCircle.position = globalSelected[0].point;
+            }
           };
           if (event.key == 's') {
-            globalSelected.point.y += moveAmount;
+            for (let i = 0; i < globalSelected.length; i++) {
+              globalSelected[i].point.y += moveAmount;
+              selectCircle.position = globalSelected[0].point;
+            }
           };
+          if (event.key == 'x') {
+            var testHit = paper.project.hitTestAll(mouse.point, CornerOptions);
 
-          selectCircle.position = globalSelected.point;
+            console.log(testHit);
+          }
+
+
+
 
         }
 
