@@ -34,7 +34,6 @@
   <canvas resize></canvas>
 
   <script>
-
     window.onload = () => {
       // Setup Paper
 
@@ -46,7 +45,6 @@
 
       var mouse = new paper.Point;
 
-
       var mouseText = new paper.PointText(new paper.Point(100, 500));
       mouseText.content = 'Mouse position: '
 
@@ -57,20 +55,13 @@
       var hitText = new paper.PointText(new paper.Point(100, 540));
       hitText.content = 'Mouse Hit: '
 
-
       function deleteChildren(item) {
-        console.log(item.parent);
-        //console.log("deleting children " + item.children);
         var parentGroup = item.parent;
-        console.log(parentGroup);
-        //parentGroup.children[1].remove();
-
 
         parentGroup.children.forEach(i => {
           if (i.name === "pocket")
             i.remove();
         });
-        console.log(parentGroup);
       }
 
       function createOffsetAgain(item) {
@@ -80,8 +71,7 @@
         newOffset.fillColor = 'white';
         newOffset.strokeWidth = 1;
 
-
-        var newGroup = paper.Group();
+        var newGroup = new paper.Group();
         newGroup.clipped = true;
         newGroup.name = "pocket";
 
@@ -156,10 +146,8 @@
       pocketGroup2.fillColor = 'lightgrey';
 
       var topgroup1 = new paper.Group([tri1, pocketGroup1])
-      pocketGroup1.name = 'top';
 
       var topgroup2 = new paper.Group([tri2, pocketGroup2])
-      pocketGroup2.name = 'top';
 
 
 
@@ -221,7 +209,6 @@
           const tool = this.tools.find(tool => tool.name === name)
           tool.activate()
         }
-
         // add more methods here as you see fit ...
       }
 
@@ -333,10 +320,9 @@
 
             console.log("selected Items " + selectedItems)
             for (let i = 0; i < selectedItems.length; i++) {
-              //deleteChildren(selectedItems[i]);
+              deleteChildren(selectedItems[i]);
             }
 
-            deleteChildren(selectedItems);
 
             //globalSelected = hit;
             if (globalSelected[0] != null) {
@@ -349,6 +335,7 @@
         }
 
         tool.onMouseUp = function (event) {
+		  console.log(selectedItems)
           createOffsetAgain(selectedItems);
         }
 
