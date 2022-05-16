@@ -47,59 +47,49 @@
       var mouse = new paper.Point;
 
 
+      var mouseText = new paper.PointText(new paper.Point(100, 500));
+      mouseText.content = 'Mouse position: '
 
-      // Create path.
-      var samplePath = new paper.Path({
-        segments: [
-          [500, 100],
-          [600, 100],
-          [760, 170],
-          [860, 170],
-          [520, 250]
-        ],
-        strokeColor: 'red',
-        strokeWidth: 5
-      });
+      var sceneText = new paper.PointText(new paper.Point(100, 520));
+      sceneText.fillColor = 'black';
+      sceneText.content = 'Project Items: ' + paper.project.activeLayer.toString();
 
-
-      var lineThick = 15;
-
-      var offsetSample = new paper.Group;
-
-      var newOffset = PaperOffset.offset(samplePath, lineThick)
-      newOffset.strokeColor = 'black';
-      newOffset.strokeWidth = 1;
-      newOffset.name = 'offset';
-
-      offsetSample.addChild(samplePath);
-      offsetSample.addChild(newOffset);
-
-
+      var hitText = new paper.PointText(new paper.Point(100, 540));
+      hitText.content = 'Mouse Hit: '
 
 
       function deleteChildren(item) {
-        console.log("deleting children " + item.children);
-        item.children.forEach(i => {
+        console.log(item.parent);
+        //console.log("deleting children " + item.children);
+        var parentGroup = item.parent;
+        console.log(parentGroup);
+        //parentGroup.children[1].remove();
+
+
+        parentGroup.children.forEach(i => {
           if (i.name === "pocket")
             i.remove();
         });
+        console.log(parentGroup);
       }
 
       function createOffsetAgain(item) {
-        console.log("creating item " + item.children[0]);
-        var newOffset = PaperOffset.offset(item.children[0], -10)
+
+        var newOffset = PaperOffset.offset(item[1], -10)
         newOffset.strokeColor = 'black';
         newOffset.fillColor = 'white';
         newOffset.strokeWidth = 1;
 
-        //var clipping = PaperOffset.offset(newOffset, 1)
 
-        var newGroup = paper.Group(newOffset);
-        //newGroup.clipped = true;
+        var newGroup = paper.Group();
+        newGroup.clipped = true;
         newGroup.name = "pocket";
 
-        item.addChild(newGroup);
+        newGroup.addChild(item[1]);
 
+        newGroup.addChild(newOffset);
+
+        //var clipping = PaperOffset.offset(newOffset, 1)
 
       }
 
@@ -118,56 +108,61 @@
       selectCircle.strokeColor = 'black';
 
 
-      var outpath = new paper.Path();
-      outpath.strokeColor = 'rgb(191, 91, 91, 0.5)'
-      outpath.add(new paper.Point(topleft, topleft));
-      outpath.add(new paper.Point(topleft, bottomright));
-      outpath.add(new paper.Point(bottomright, bottomright));
-      outpath.add(new paper.Point(bottomright, topleft));
-      outpath.closePath();
+      // var outpath = new paper.Path();
+      // outpath.strokeColor = 'rgb(191, 91, 91, 0.5)'
+      // outpath.add(new paper.Point(topleft, topleft));
+      // outpath.add(new paper.Point(topleft, bottomright));
+      // outpath.add(new paper.Point(bottomright, bottomright));
+      // outpath.add(new paper.Point(bottomright, topleft));
+      // outpath.closePath();
 
       //let offset1 = PaperOffset.offset(outpath, 5)
-      PaperOffset.offsetStroke(outpath, 3)
+      // PaperOffset.offsetStroke(outpath, 3)
 
 
 
 
 
 
-      var p1 = new paper.Path();
-      p1.strokeColor = 'black';
-      p1.add(new paper.Point(50, 50));
-      p1.add(new paper.Point(50, 380));
-      p1.add(new paper.Point(380, 380));
-      p1.closePath();
+      var tri1 = new paper.Path();
+      tri1.strokeColor = 'black';
+      tri1.add(new paper.Point(50, 50));
+      tri1.add(new paper.Point(50, 380));
+      tri1.add(new paper.Point(380, 380));
+      tri1.closePath();
 
-      var p2 = new paper.Path();
-      p2.strokeColor = 'black';
-      p2.add(new paper.Point(50, 50));
-      p2.add(new paper.Point(380, 50));
-      p2.add(new paper.Point(380, 380));
-      p2.closePath();
+      var tri2 = new paper.Path();
+      tri2.strokeColor = 'black';
+      tri2.add(new paper.Point(50, 50));
+      tri2.add(new paper.Point(380, 50));
+      tri2.add(new paper.Point(380, 380));
+      tri2.closePath();
 
       //globalSelected[0] = p1.segments[0].point;
 
-      var f1 = PaperOffset.offset(p1, -5)
-      var f2 = PaperOffset.offset(p2, -5)
+      var tri1offset = PaperOffset.offset(tri1, -15)
+      var tri2offset = PaperOffset.offset(tri2, -15)
 
-      var c1 = PaperOffset.offset(f1, 1);
-      var c2 = PaperOffset.offset(f2, 1);
-
-      var testGroup = new paper.Group([c1, f1])
-      testGroup.clipped = true;
-      testGroup.name = 'pocket';
-
-      var testGroup2 = new paper.Group([c2, f2])
-      testGroup2.clipped = true;
-
-      var testGroup3 = new paper.Group(p1, testGroup)
+      //var c1 = PaperOffset.offset(f1, 1);
+      //var c2 = PaperOffset.offset(f2, 1);
 
 
-      f2.fillColor = 'lightgrey';
-      f1.fillColor = 'lightgrey';
+      var pocketGroup1 = new paper.Group([tri1offset])
+      pocketGroup1.name = 'pocket';
+      pocketGroup1.fillColor = 'lightgrey';
+
+      var pocketGroup2 = new paper.Group([tri2offset])
+      pocketGroup2.name = 'pocket';
+      pocketGroup2.fillColor = 'lightgrey';
+
+      var topgroup1 = new paper.Group([tri1, pocketGroup1])
+      pocketGroup1.name = 'top';
+
+      var topgroup2 = new paper.Group([tri2, pocketGroup2])
+      pocketGroup2.name = 'top';
+
+
+
 
 
 
@@ -341,7 +336,7 @@
               //deleteChildren(selectedItems[i]);
             }
 
-            deleteChildren(selectedItems[0].parent);
+            deleteChildren(selectedItems);
 
             //globalSelected = hit;
             if (globalSelected[0] != null) {
@@ -354,11 +349,7 @@
         }
 
         tool.onMouseUp = function (event) {
-          for (let i = 0; i < selectedItems.length; i++) {
-            createOffsetAgain(selectedItems[i]);
-          }
-
-
+          createOffsetAgain(selectedItems);
         }
 
         tool.onMouseDrag = function (event) {
@@ -373,6 +364,11 @@
 
         tool.onMouseMove = function (event) {
           mouse.point = event.point;
+          mouseText.content = 'Mouse position: ' + mouse.point.toString();
+
+          hit = paper.project.hitTestAll(event.point, CornerOptions);
+          hitText.content = 'Mouse Hit: ' + hit.toString();
+
         }
 
         tool.onKeyDown = function (event) {

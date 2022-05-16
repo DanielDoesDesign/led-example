@@ -3,9 +3,9 @@ import Paper from 'paper';
 import draw1 from './draw1';
 
 const Paper_App = props => {
-  
+
   const canvasRef = useRef(null)
-  
+
   useEffect(() => {
     const canvas = canvasRef.current;
     Paper.setup(canvas);
@@ -15,7 +15,7 @@ const Paper_App = props => {
   }, []);
 
 
-  
+
   return <canvas ref={canvasRef} {...props} id="canvas" resize="true" />
 }
 

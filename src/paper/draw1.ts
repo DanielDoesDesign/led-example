@@ -5,6 +5,11 @@ import { loadedData } from '../three/core/helperFunc'
 
 const draw1 = () => {
 
+    Paper.view.matrix.d = -1;
+    Paper.view.translate(new Paper.Point(0, -Paper.view.viewSize.height));
+    Paper.view.scale(2, 2, new Paper.Point(0, 0))
+
+
 
     //Set background
     var from = new Paper.Point(0, 0);
@@ -12,6 +17,11 @@ const draw1 = () => {
     var rect = new Paper.Path.Rectangle(from, to);
     rect.strokeColor = new Paper.Color('red')
     rect.fillColor = new Paper.Color('white')
+
+    var axisPoints = [new Paper.Point(0, 500), new Paper.Point(0, 0), new Paper.Point(500, 0)];
+    var axis = new Paper.Path(axisPoints)
+    axis.strokeColor = new Paper.Color('black')
+    axis.translate(new Paper.Point(20, 20))
 
     let outLines = []
     let inLines = []
@@ -31,6 +41,7 @@ const draw1 = () => {
         //newLine.strokeColor = new Paper.Color('black')
     }
     myOutPath.closePath();
+    myOutPath.translate(new Paper.Point(20, 20))
 
 
 
@@ -47,29 +58,9 @@ const draw1 = () => {
     }
 
 
-    var star = new Paper.Path.Star({
-        center: Paper.view.center,
-        points: 6,
-        radius1: 20,
-        radius2: 40,
-        fillColor: 'red'
-    });
+    Paper.view.viewSize.width = 800;
+    Paper.view.viewSize.height = 800;
 
-    var circle = new Paper.Path.Circle({
-        center: Paper.view.center,
-        radius: 25,
-        strokeColor: 'black'
-    });
-
-
-    // Create a group of the two items and clip it:
-    var group = new Paper.Group([circle, star]);
-    group.clipped = true;
-
-    Paper.view.viewSize.width = 600;
-    Paper.view.viewSize.height = 600;
-
-    Paper.view.matrix.invert()
 
     /*
     Paper.view.onFrame = onFrame;
