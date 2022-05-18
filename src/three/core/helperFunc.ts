@@ -39,6 +39,9 @@ export class Line {
 }
 
 class data {
+    entData: any[]
+    pointArray: any[]
+    entArray: any[]
     lineData: any[]
     inLines: any[]
     outLines: any[]
@@ -54,18 +57,27 @@ class data {
     }
 
     loadPolys() {
-        this.lineData = test["entities"];
-        for (let i = 0; i < this.lineData.length; i++) {
-            let line = this.lineData[i];
-            if (line.type !== "LWPOLYLINE") continue;
-            for (let i = 0; i < line["vertices"].length; i++) {
-                let pPos = line["vertices"][i];
+        this.entData = test["entities"];
+        this.pointArray = [];
+        this.entArray = [];
+
+        for (let i = 0; i < this.entData.length; i++) {
+            this.pointArray = [];
+            let thisEntity = this.lineData[i];
+            if (thisEntity.type !== "LWPOLYLINE") continue;
+
+
+            for (let j = 0; j < thisEntity["vertices"].length; j++) {
+                let pPos = thisEntity["vertices"][j];
                 let px = pPos["x"];
                 let py = pPos["y"];
-                this.outLines.push(new Point(px, py));
+                this.pointArray.push(new Point(px, py));
             }
+
+            this.entArray[i] = this.pointArray;
+
         }
-        return this.outLines;
+        return this.entArray;
     }
 
 
@@ -152,5 +164,6 @@ export function loadedData() {
     newData.loadinLines();
     newData.loadoutLines();
     newData.loadLeds();
+    newData.loadPolys();
     return newData
 } 

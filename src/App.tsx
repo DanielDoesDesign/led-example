@@ -29,10 +29,31 @@ const TabContainer = styled.div`
 function App() {
 
 	const [tabIndex, setTabIndex] = useState(0);
+	const [buttonIndex, setbutIndex] = useState(0);
 
 	return (
+
+
 		<div className="App">
+
+			<button className="tool-button" data-tool-name="toolPath">
+				Draw Paths
+			</button>
+
+			<button className="tool-button" data-tool-name="toolCircle">
+				Stamp Circles
+			</button>
+
+			<button className="tool-button" data-tool-name="toolLed">
+				Place Leds
+			</button>
+
+			<button className="tool-button" data-tool-name="toolSelect">
+				Move Points
+			</button>
+
 			<header className="App-header">
+
 				<TabContainer>
 					<Tab onClick={() => setTabIndex(0)} selected={tabIndex == 0}>PaperJS</Tab>
 					<Tab onClick={() => setTabIndex(1)} selected={tabIndex == 1}>ThreeJS</Tab>

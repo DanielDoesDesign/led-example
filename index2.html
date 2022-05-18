@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+</head>
+
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.15/paper-core.js"></script>
+  <script type="module" src="node_modules/paperjs-offset/demo/paperjs-offset.js"></script>
+  <script type="javascript" src="src/objects/uni_poly.js"></script>
+
+  <button class="tool-button" data-tool-name="toolPath">
+    Draw Paths
+  </button>
+
+  <button class="tool-button" data-tool-name="toolCircle">
+    Stamp Circles
+  </button>
+
+  <button class="tool-button" data-tool-name="toolLed">
+    Place Leds
+  </button>
+
+  <button class="tool-button" data-tool-name="toolSelect">
+    Move Points
+  </button>
+
+
+
+  <canvas resize></canvas>
+
+  <script>
+    window.onload = () => {
+      // Setup Paper
+
+      paper.setup(document.querySelector('canvas'))
+
+
+      var topleft = 30;
+      var bottomright = 400;
+
+      var mouse = new paper.Point;
+
+      var mouseText = new paper.PointText(new paper.Point(100, 500));
+      mouseText.content = 'Mouse position: '
+
+      var sceneText = new paper.PointText(new paper.Point(100, 520));
+      sceneText.fillColor = 'black';
+      sceneText.content = 'Project Items: ' + paper.project.activeLayer.toString();
+
+      var hitText = new paper.PointText(new paper.Point(100, 540));
+      hitText.content = 'Mouse Hit: '
+
+      function deleteChildren(item) {
+
+        if (item.getClassName() === 'Group') {
+          var parentGroup = item.parent;
+          //item.children[1].remove();
+          parentGroup.children.forEach(i => {
+            if (i.name === "pocket")
+              i.remove();
+          });
+        }
+      }
+
+      function createOffsetAgain(item) {
+
+        if (item.getClassName() === 'Group') {
+
+          var newOffset = PaperOffset.offset(item.children[0], -10)
+          newOffset.strokeColor = 'black';
+          newOffset.fillColor = 'lightgrey';
+          newOffset.strokeWidth = 1;
+
+
+          var c1 = PaperOffset.offset(newOffset, 1);
+
+
+          var newGroup = new paper.Group([c1, newOffset])
+          newGroup.name = "pocket";
+          newGroup.clipped = true;
+          //newGroup.locked = true;
+
+          item.parent.addChild(newGroup);
+
+
+        }
+
+
+
+      }
+
+      //newOffset.remove();
+
+
+
+      var moveAmount = 3;
+
+
+      var globalSelected;
+      var selectedItems;
+
+
+      var selectCircle = new paper.Path.Circle(new paper.Point(600, 600), 10);
+      selectCircle.strokeColor = 'black';
+
+
+      // var outpath = new paper.Path();
+      // outpath.strokeColor = 'rgb(191, 91, 91, 0.5)'
+      // outpath.add(new paper.Point(topleft, topleft));
+      // outpath.add(new paper.Point(topleft, bottomright));
+      // outpath.add(new paper.Point(bottomright, bottomright));
+      // outpath.add(new paper.Point(bottomright, topleft));
+      // outpath.closePath();
+
+      //let offset1 = PaperOffset.offset(outpath, 5)
+      // PaperOffset.offsetStroke(outpath, 3)
+
+
+
+
+
+
+      var tri1 = new paper.Path();
+      tri1.strokeColor = 'black';
+      tri1.add(new paper.Point(50, 50));
+      tri1.add(new paper.Point(50, 380));
+      tri1.add(new paper.Point(380, 380));
+      tri1.closePath();
+
+      var tri2 = new paper.Path();
+      tri2.strokeColor = 'black';
+      tri2.add(new paper.Point(50, 50));
+      tri2.add(new paper.Point(380, 50));
+      tri2.add(new paper.Point(380, 380));
+      tri2.closePath();
+
+      //globalSelected[0] = p1.segments[0].point;
+
+      var tri1offset = PaperOffset.offset(tri1, -5)
+      var tri2offset = PaperOffset.offset(tri2, -5)
+
+      var c1 = PaperOffset.offset(tri1offset, 1);
+      var c2 = PaperOffset.offset(tri2offset, 1);
+
+
+      var pocketGroup1 = new paper.Group([c1, tri1offset])
+      pocketGroup1.name = 'pocket';
+      pocketGroup1.fillColor = 'lightgrey';
+      pocketGroup1.clipped = true;
+
+      var pocketGroup2 = new paper.Group([c2, tri2offset])
+      pocketGroup2.name = 'pocket';
+      pocketGroup2.fillColor = 'lightgrey';
+      pocketGroup2.clipped = true;
+
+      var topgroup1 = new paper.Group([tri1, pocketGroup1])
+
+      var topgroup2 = new paper.Group([tri2, pocketGroup2])
+
+
+
+
+
+
+
+      var hitOptions = {
+        segments: false,
+        stroke: false,
+        fill: true,
+        tolerance: 5
+      };
+
+
+      var CornerOptions = {
+        segments: true,
+        stroke: false,
+        fill: false,
+        tolerance: 5
+      };
+
+
+      function getSelectedThing(item) {
+
+        // Only check curves and segments if item is a path.
+        if (item.getClassName() === 'Path') {
+          // Check curves.
+          for (var i = 0, l = item.curves.length; i < l; i++) {
+            if (item.curves[i].selected) {
+              return item.curves[i];
+            }
+          }
+          // Check segments.
+          for (var i = 0, l = item.segments.length; i < l; i++) {
+            if (item.segments[i].selected) {
+              return item.segments[i];
+            }
+          }
+        }
+
+
+
+
+        // return item by default.
+        return item;
+      }
+
+
+
+      // Toolstack
+
+      class ToolStack {
+        constructor(tools) {
+          this.tools = tools.map(tool => tool())
+        }
+
+        activateTool(name) {
+          const tool = this.tools.find(tool => tool.name === name)
+          tool.activate()
+        }
+        // add more methods here as you see fit ...
+      }
+
+      // Tool Path, draws paths on mouse-drag
+
+      const toolPath = () => {
+        const tool = new paper.Tool()
+        tool.name = 'toolPath'
+
+        let path
+
+        tool.onMouseDown = function (event) {
+          path = new paper.Path()
+          path.strokeColor = '#424242'
+          path.strokeWidth = 4
+          path.add(event.point)
+        }
+
+        tool.onMouseDrag = function (event) {
+          path.add(event.point)
+        }
+
+        return tool
+      }
+
+      // Tool Circle, draws a 30px circle on mousedown
+
+      const toolCircle = () => {
+        const tool = new paper.Tool()
+        tool.name = 'toolCircle'
+
+        let path
+
+        tool.onMouseDown = function (event) {
+          path = new paper.Path.Circle({
+            center: event.point,
+            radius: 30,
+            fillColor: '#9C27B0'
+          })
+        }
+
+        return tool
+      }
+
+      const toolLed = () => {
+        const tool = new paper.Tool()
+        tool.name = 'toolLed'
+
+        tool.onMouseDown = function (event) {
+          var hitResult = paper.project.hitTest(event.point, hitOptions);
+          if (!hitResult)
+            return;
+
+          var item = hitResult.item;
+          var group = item.parent;
+
+          var newLed = new paper.Path.Circle(event.point, 200);
+          group.addChild(newLed);
+
+          var noAlpha = new paper.Color(1, 1, 1, 0);
+
+          var col = new paper.Color(1, 0, 0, 1);
+          col.hue = Math.random() * 360;
+          col.sat = 1;
+          col.brightness = 1;
+
+
+          newLed.fillColor = {
+            gradient: {
+              stops: [[col, 0.2], [noAlpha, 1]],
+              radial: true
+            },
+            origin: newLed.position,
+            destination: newLed.bounds.rightCenter
+          };
+
+          newLed.blendMode = 'multiply';
+        }
+
+        return tool
+      }
+
+      const toolSelect = () => {
+        const tool = new paper.Tool()
+        tool.name = 'toolSelect'
+
+        tool.onMouseDown = function (event) {
+          // ...only select what was clicked.
+
+          //clear selected from all other objects?
+          globalSelected = [];
+          paper.project.deselectAll();
+          selectCircle.visible = false;
+
+          hit = paper.project.hitTestAll(event.point, CornerOptions);
+
+
+          if (hit) {
+
+            for (let i = 0; i < hit.length; i++) {
+              hit[i].segment.selected = true;
+            }
+
+            // puts segments into global array
+            globalSelected = paper.project.activeLayer.getItems({ selected: true }).map(getSelectedThing)
+
+            // puts selected items into an array
+            selectedItems = paper.project.activeLayer.getItems({ selected: true });
+
+            console.log("selected Items " + selectedItems)
+            for (let i = 0; i < selectedItems.length; i++) {
+              deleteChildren(selectedItems[i]);
+            }
+
+
+            //globalSelected = hit;
+            if (globalSelected[0] != null) {
+              selectCircle.visible = true;
+              selectCircle.position = globalSelected[0].point;
+            }
+          }
+
+          // console.log(globalSelected)
+        }
+
+        tool.onMouseUp = function (event) {
+          console.log(globalSelected)
+          for (let i = 0; i < selectedItems.length; i++) {
+            createOffsetAgain(selectedItems[i]);
+          }
+        }
+
+        tool.onMouseDrag = function (event) {
+          if (globalSelected[0] != null) {
+            for (let i = 0; i < globalSelected.length; i++) {
+              globalSelected[i].point = event.point;
+            }
+            selectCircle.position = globalSelected[0].point;
+          }
+        }
+
+
+        tool.onMouseMove = function (event) {
+          mouse.point = event.point;
+          mouseText.content = 'Mouse position: ' + mouse.point.toString();
+
+          hit = paper.project.hitTestAll(event.point, CornerOptions);
+          hitText.content = 'Mouse Hit: ' + hit.toString();
+
+        }
+
+        tool.onKeyDown = function (event) {
+
+          if (event.key == 'a') {
+            for (let i = 0; i < globalSelected.length; i++) {
+              globalSelected[i].point.x -= moveAmount;
+              selectCircle.position = globalSelected[0].point;
+            }
+          };
+          if (event.key == 'd') {
+            for (let i = 0; i < globalSelected.length; i++) {
+              globalSelected[i].point.x += moveAmount;
+              selectCircle.position = globalSelected[0].point;
+            }
+          };
+          if (event.key == 'w') {
+            for (let i = 0; i < globalSelected.length; i++) {
+              globalSelected[i].point.y -= moveAmount;
+              selectCircle.position = globalSelected[0].point;
+            }
+          };
+          if (event.key == 's') {
+            for (let i = 0; i < globalSelected.length; i++) {
+              globalSelected[i].point.y += moveAmount;
+              selectCircle.position = globalSelected[0].point;
+            }
+          };
+          if (event.key == 'x') {
+            var testHit = paper.project.hitTestAll(mouse.point, CornerOptions);
+
+            console.log(testHit);
+          }
+
+
+
+
+        }
+
+
+        return tool
+      }
+
+
+
+
+
+      // Construct a Toolstack, passing your Tools
+
+      const toolStack = new ToolStack([toolSelect, toolLed, toolPath, toolCircle])
+
+      // Activate a certain Tool
+
+      toolStack.activateTool('toolSelect')
+
+      // Attach click handlers for Tool activation on all
+      // DOM buttons with class '.tool-button'
+
+      document.querySelectorAll('.tool-button').forEach(toolBtn => {
+        toolBtn.addEventListener('click', e => {
+          toolStack.activateTool(e.target.getAttribute('data-tool-name'))
+        })
+      })
+    }
+
+
+  </script>
+</body>
+
+</html>
+
+<style>
+  html,
+  body,
+  canvas {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+</style>
