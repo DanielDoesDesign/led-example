@@ -65,8 +65,6 @@ class data {
             this.pointArray = [];
             let thisEntity = this.lineData[i];
             if (thisEntity.type !== "LWPOLYLINE") continue;
-
-
             for (let j = 0; j < thisEntity["vertices"].length; j++) {
                 let pPos = thisEntity["vertices"][j];
                 let px = pPos["x"];
@@ -74,7 +72,7 @@ class data {
                 this.pointArray.push(new Point(px, py));
             }
 
-            this.entArray[i] = this.pointArray;
+            this.entArray.push(this.pointArray);
 
         }
         return this.entArray;

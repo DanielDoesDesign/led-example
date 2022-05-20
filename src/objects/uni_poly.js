@@ -37,9 +37,9 @@ export default {
       "$ATTMODE": 1,
       "$TEXTSIZE": 2.5,
       "$TRACEWID": 1,
-      "$TEXTSTYLE": "Standard",
+      "$TEXTSTYLE": "STANDARD",
       "$CLAYER": "0",
-      "$CELTYPE": "ByLayer",
+      "$CELTYPE": "BYLAYER",
       "$CECOLOR": 256,
       "$CELTSCALE": 1,
       "$DISPSILH": 0,
@@ -97,19 +97,19 @@ export default {
       "$DIMTDEC": 2,
       "$DIMALTU": 2,
       "$DIMALTTD": 3,
-      "$DIMTXSTY": "Standard",
+      "$DIMTXSTY": "STANDARD",
       "$DIMAUNIT": 0,
       "$DIMADEC": 0,
       "$DIMALTRND": 0,
       "$DIMAZIN": 0,
-      "$DIMDSEP": 44,
+      "$DIMDSEP": 46,
       "$DIMATFIT": 3,
       "$DIMFRAC": 0,
       "$DIMLDRBLK": "",
       "$DIMLUNIT": 2,
       "$DIMLWD": -2,
       "$DIMLWE": -2,
-      "$DIMTMOVE": 0,
+      "$DIMTMOVE": 2,
       "$DIMFXL": 1,
       "$DIMFXLON": 0,
       "$DIMJOGANG": 0.7853981633974483,
@@ -138,10 +138,10 @@ export default {
       "$SKPOLY": 0,
       "$TDCREATE": 2455023.137359514,
       "$TDUCREATE": 2455022.637359514,
-      "$TDUPDATE": 2459715.617315371,
-      "$TDUUPDATE": 2459715.117315371,
-      "$TDINDWG": 0.0001347106,
-      "$TDUSRTIMER": 0.0001347106,
+      "$TDUPDATE": 2459719.863690104,
+      "$TDUUPDATE": 2459719.363690104,
+      "$TDINDWG": 0.0028951505,
+      "$TDUSRTIMER": 0.0001280787,
       "$USRTIMER": 1,
       "$ANGBASE": 0,
       "$ANGDIR": 0,
@@ -151,7 +151,7 @@ export default {
       "$SPLFRAME": 0,
       "$SPLINETYPE": 6,
       "$SPLINESEGS": 8,
-      "$HANDSEED": "139",
+      "$HANDSEED": "221",
       "$SURFTAB1": 6,
       "$SURFTAB2": 6,
       "$SURFTYPE": 6,
@@ -299,7 +299,7 @@ export default {
       "$PLINEGEN": 0,
       "$PSLTSCALE": 1,
       "$TREEDEPTH": 3020,
-      "$CMLSTYLE": "Standard",
+      "$CMLSTYLE": "STANDARD",
       "$CMLJUST": 0,
       "$CMLSCALE": 20,
       "$PROXYGRAPHICS": 1,
@@ -308,13 +308,13 @@ export default {
       "$ENDCAPS": 0,
       "$JOINSTYLE": 0,
       "$LWDISPLAY": false,
-      "$INSUNITS": 4,
+      "$INSUNITS": 0,
       "$HYPERLINKBASE": "",
       "$STYLESHEET": "",
       "$XEDIT": true,
       "$CEPSNTYPE": 0,
       "$PSTYLEMODE": true,
-      "$FINGERPRINTGUID": "{EC6BB858-51AA-46EC-B484-6C9CC7AB3E2E}",
+      "$FINGERPRINTGUID": "{9fb629d0-14fe-4b5e-960d-e1e86d657eae}",
       "$VERSIONGUID": "{FAEB1C32-E019-11D5-929B-00C0DF256EC4}",
       "$EXTNAMES": true,
       "$PSVPSCALE": 0,
@@ -322,7 +322,7 @@ export default {
       "$SORTENTS": 127,
       "$INDEXCTL": 0,
       "$HIDETEXT": 1,
-      "$XCLIPFRAME": 0,
+      "$XCLIPFRAME": 2,
       "$HALOGAP": 0,
       "$OBSCOLOR": 257,
       "$OBSLTYPE": 0,
@@ -336,8 +336,8 @@ export default {
       "$STEPSPERSEC": 2,
       "$STEPSIZE": 6,
       "$3DDWFPREC": 2,
-      "$PSOLWIDTH": 5,
-      "$PSOLHEIGHT": 80,
+      "$PSOLWIDTH": 0.25,
+      "$PSOLHEIGHT": 4,
       "$LOFTANG1": 1.570796326794897,
       "$LOFTANG2": 1.570796326794897,
       "$LOFTMAG1": 0,
@@ -350,7 +350,7 @@ export default {
       "$TIMEZONE": -8000,
       "$LIGHTGLYPHDISPLAY": 1,
       "$TILEMODELIGHTSYNCH": 1,
-      "$SOLIDHIST": 1,
+      "$SOLIDHIST": 0,
       "$SHOWHIST": 1,
       "$DWFFRAME": 2,
       "$DGNFRAME": 2,
@@ -366,7 +366,7 @@ export default {
          "viewPorts": [
             {
                "ownerHandle": "8",
-               "name": "*Active",
+               "name": "*ACTIVE",
                "lowerLeftCorner": {
                   "x": 0,
                   "y": 0
@@ -376,8 +376,8 @@ export default {
                   "y": 1
                },
                "center": {
-                  "x": 357.9080923584386,
-                  "y": 101.7347058823529
+                  "x": 256.7363894969737,
+                  "y": 149.9803919350028
                },
                "snapBasePoint": {
                   "x": 0,
@@ -397,7 +397,7 @@ export default {
                   "z": 1
                },
                "viewTarget": {
-                  "x": -134.1869158878504,
+                  "x": -134.1869158878502,
                   "y": 0,
                   "z": 0
                },
@@ -432,18 +432,18 @@ export default {
          "handle": "5",
          "ownerHandle": "0",
          "lineTypes": {
-            "ByBlock": {
-               "name": "ByBlock",
+            "BYBLOCK": {
+               "name": "BYBLOCK",
                "description": "",
                "patternLength": 0
             },
-            "ByLayer": {
-               "name": "ByLayer",
+            "BYLAYER": {
+               "name": "BYLAYER",
                "description": "",
                "patternLength": 0
             },
-            "Continuous": {
-               "name": "Continuous",
+            "CONTINUOUS": {
+               "name": "CONTINUOUS",
                "description": "Solid line",
                "patternLength": 0
             }
@@ -459,57 +459,133 @@ export default {
                "visible": true,
                "colorIndex": 7,
                "color": 16777215
-            },
-            "Defpoints": {
-               "name": "Defpoints",
-               "frozen": false,
-               "visible": true,
-               "colorIndex": 7,
-               "color": 16777215
             }
          }
       }
    },
    "blocks": {
-      "*Model_Space": {
+      "*MODEL_SPACE": {
          "handle": "20",
          "ownerHandle": "1F",
          "layer": "0",
-         "name": "*Model_Space",
+         "name": "*MODEL_SPACE",
          "position": {
             "x": 0,
             "y": 0,
             "z": 0
          },
-         "name2": "*Model_Space",
+         "name2": "*MODEL_SPACE",
          "xrefPath": ""
       },
-      "*Paper_Space": {
+      "*PAPER_SPACE": {
          "handle": "1C",
          "ownerHandle": "1B",
          "paperSpace": true,
          "layer": "0",
-         "name": "*Paper_Space",
+         "name": "*PAPER_SPACE",
          "position": {
             "x": 0,
             "y": 0,
             "z": 0
          },
-         "name2": "*Paper_Space",
+         "name2": "*PAPER_SPACE",
          "xrefPath": ""
       },
-      "*Paper_Space0": {
+      "*PAPER_SPACE0": {
          "handle": "24",
          "ownerHandle": "23",
          "layer": "0",
-         "name": "*Paper_Space0",
+         "name": "*PAPER_SPACE0",
          "position": {
             "x": 0,
             "y": 0,
             "z": 0
          },
-         "name2": "*Paper_Space0",
+         "name2": "*PAPER_SPACE0",
          "xrefPath": ""
+      },
+      "LED": {
+         "handle": "101",
+         "ownerHandle": "FE",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+         },
+         "name2": "LED",
+         "xrefPath": "",
+         "entities": [
+            {
+               "type": "LINE",
+               "vertices": [
+                  {
+                     "x": -2.5,
+                     "y": 0,
+                     "z": 0
+                  },
+                  {
+                     "x": 2.5,
+                     "y": 0,
+                     "z": 0
+                  }
+               ],
+               "handle": "102",
+               "ownerHandle": "FE",
+               "layer": "0",
+               "colorIndex": 6,
+               "color": 16711935
+            },
+            {
+               "type": "LINE",
+               "vertices": [
+                  {
+                     "x": 0,
+                     "y": 2.5,
+                     "z": 0
+                  },
+                  {
+                     "x": 0,
+                     "y": -2.5,
+                     "z": 0
+                  }
+               ],
+               "handle": "103",
+               "ownerHandle": "FE",
+               "layer": "0",
+               "colorIndex": 6,
+               "color": 16711935
+            },
+            {
+               "type": "LWPOLYLINE",
+               "vertices": [
+                  {
+                     "x": -2.5,
+                     "y": 2.5
+                  },
+                  {
+                     "x": -2.5,
+                     "y": -2.5
+                  },
+                  {
+                     "x": 2.5,
+                     "y": -2.5
+                  },
+                  {
+                     "x": 2.5,
+                     "y": 2.5
+                  }
+               ],
+               "handle": "104",
+               "ownerHandle": "FE",
+               "layer": "0",
+               "colorIndex": 6,
+               "color": 16711935,
+               "shape": true,
+               "hasContinuousLinetypePattern": false
+            }
+         ]
       }
    },
    "entities": [
@@ -537,9 +613,9 @@ export default {
                "y": 172.3917533949498
             }
          ],
-         "handle": "103",
+         "handle": "14B",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -563,9 +639,9 @@ export default {
                "y": 196.355022970296
             }
          ],
-         "handle": "104",
+         "handle": "14C",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -589,9 +665,9 @@ export default {
                "y": 234.9337676419793
             }
          ],
-         "handle": "105",
+         "handle": "14D",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -615,9 +691,9 @@ export default {
                "y": 234.9337676419793
             }
          ],
-         "handle": "106",
+         "handle": "14E",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -645,9 +721,9 @@ export default {
                "y": 242.2937271571085
             }
          ],
-         "handle": "107",
+         "handle": "14F",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -675,9 +751,9 @@ export default {
                "y": 252.6730780916841
             }
          ],
-         "handle": "108",
+         "handle": "150",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -701,9 +777,9 @@ export default {
                "y": 252.6730780916943
             }
          ],
-         "handle": "109",
+         "handle": "151",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -731,9 +807,9 @@ export default {
                "y": 162.7894241372924
             }
          ],
-         "handle": "10A",
+         "handle": "152",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -757,9 +833,9 @@ export default {
                "y": 207.6361672907806
             }
          ],
-         "handle": "10B",
+         "handle": "153",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -783,9 +859,9 @@ export default {
                "y": 207.6361672907806
             }
          ],
-         "handle": "10C",
+         "handle": "154",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -809,9 +885,9 @@ export default {
                "y": 231.7969835221666
             }
          ],
-         "handle": "10D",
+         "handle": "155",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -839,9 +915,9 @@ export default {
                "y": 231.7969835221666
             }
          ],
-         "handle": "10E",
+         "handle": "156",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -869,9 +945,9 @@ export default {
                "y": 229.8523464361206
             }
          ],
-         "handle": "10F",
+         "handle": "157",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -899,9 +975,9 @@ export default {
                "y": 249.8049498671716
             }
          ],
-         "handle": "110",
+         "handle": "158",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -929,9 +1005,9 @@ export default {
                "y": 238.2204671932559
             }
          ],
-         "handle": "111",
+         "handle": "159",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -955,9 +1031,9 @@ export default {
                "y": 256.8558520238489
             }
          ],
-         "handle": "112",
+         "handle": "15A",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -989,9 +1065,9 @@ export default {
                "y": 217.0113421079295
             }
          ],
-         "handle": "113",
+         "handle": "15B",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1019,9 +1095,9 @@ export default {
                "y": 237.3254525227167
             }
          ],
-         "handle": "114",
+         "handle": "15C",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1049,9 +1125,9 @@ export default {
                "y": 250.0957229170963
             }
          ],
-         "handle": "115",
+         "handle": "15D",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1079,9 +1155,9 @@ export default {
                "y": 246.559741322948
             }
          ],
-         "handle": "116",
+         "handle": "15E",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1105,9 +1181,9 @@ export default {
                "y": 233.4701995222131
             }
          ],
-         "handle": "117",
+         "handle": "15F",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1139,9 +1215,9 @@ export default {
                "y": 206.3399617772916
             }
          ],
-         "handle": "118",
+         "handle": "160",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1165,9 +1241,9 @@ export default {
                "y": 209.0743898902292
             }
          ],
-         "handle": "119",
+         "handle": "161",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1195,40 +1271,10 @@ export default {
                "y": 206.3399617772916
             }
          ],
-         "handle": "11A",
+         "handle": "162",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
-         "hasContinuousLinetypePattern": false
-      },
-      {
-         "type": "LWPOLYLINE",
-         "vertices": [
-            {
-               "x": 183.84500418061,
-               "y": 209.0743898902292
-            },
-            {
-               "x": 198.9633193585323,
-               "y": 203.2392506987453
-            },
-            {
-               "x": 210.0589249423319,
-               "y": 179.058787534057
-            },
-            {
-               "x": 182.1558313731621,
-               "y": 199.1510453602095
-            },
-            {
-               "x": 185.2485319785628,
-               "y": 204.0893898752838
-            }
-         ],
-         "handle": "11B",
-         "ownerHandle": "1F",
-         "layer": "Defpoints",
-         "shape": true,
          "hasContinuousLinetypePattern": false
       },
       {
@@ -1259,9 +1305,9 @@ export default {
                "y": 179.058787534057
             }
          ],
-         "handle": "11C",
+         "handle": "164",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1289,9 +1335,9 @@ export default {
                "y": 159.6580548623897
             }
          ],
-         "handle": "11D",
+         "handle": "165",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1315,9 +1361,9 @@ export default {
                "y": 198.9349355343293
             }
          ],
-         "handle": "11E",
+         "handle": "166",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1345,9 +1391,9 @@ export default {
                "y": 198.9349355343293
             }
          ],
-         "handle": "11F",
+         "handle": "167",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1379,40 +1425,10 @@ export default {
                "y": 187.6930007547853
             }
          ],
-         "handle": "120",
+         "handle": "168",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
-         "hasContinuousLinetypePattern": false
-      },
-      {
-         "type": "LWPOLYLINE",
-         "vertices": [
-            {
-               "x": 176.0451716586497,
-               "y": 160.6747836609094
-            },
-            {
-               "x": 151.566654680908,
-               "y": 166.3834059250948
-            },
-            {
-               "x": 142.0400139083419,
-               "y": 175.9797447051967
-            },
-            {
-               "x": 133.1582167346642,
-               "y": 198.9349355343293
-            },
-            {
-               "x": 176.1348107918711,
-               "y": 187.6930007547853
-            }
-         ],
-         "handle": "121",
-         "ownerHandle": "1F",
-         "layer": "Defpoints",
-         "shape": true,
          "hasContinuousLinetypePattern": false
       },
       {
@@ -1435,9 +1451,9 @@ export default {
                "y": 175.9797447052188
             }
          ],
-         "handle": "122",
+         "handle": "16A",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1461,9 +1477,9 @@ export default {
                "y": 198.9349355343293
             }
          ],
-         "handle": "123",
+         "handle": "16B",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1487,9 +1503,9 @@ export default {
                "y": 167.945524723742
             }
          ],
-         "handle": "124",
+         "handle": "16C",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1513,9 +1529,9 @@ export default {
                "y": 152.9255920191354
             }
          ],
-         "handle": "125",
+         "handle": "16D",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1539,9 +1555,9 @@ export default {
                "y": 140.7862549469947
             }
          ],
-         "handle": "126",
+         "handle": "16E",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1565,9 +1581,9 @@ export default {
                "y": 140.7862549469947
             }
          ],
-         "handle": "127",
+         "handle": "16F",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1591,9 +1607,9 @@ export default {
                "y": 162.7894241372828
             }
          ],
-         "handle": "128",
+         "handle": "170",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1621,9 +1637,9 @@ export default {
                "y": 167.945524723742
             }
          ],
-         "handle": "129",
+         "handle": "171",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1647,9 +1663,9 @@ export default {
                "y": 162.7894241372924
             }
          ],
-         "handle": "12A",
+         "handle": "172",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1673,9 +1689,9 @@ export default {
                "y": 143.184240565919
             }
          ],
-         "handle": "12B",
+         "handle": "173",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1703,9 +1719,9 @@ export default {
                "y": 111.476153166921
             }
          ],
-         "handle": "12C",
+         "handle": "174",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1729,9 +1745,9 @@ export default {
                "y": 152.9255920191354
             }
          ],
-         "handle": "12D",
+         "handle": "175",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1755,9 +1771,9 @@ export default {
                "y": 111.476153166921
             }
          ],
-         "handle": "12E",
+         "handle": "176",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1781,9 +1797,9 @@ export default {
                "y": 111.476153166921
             }
          ],
-         "handle": "12F",
+         "handle": "177",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1807,9 +1823,9 @@ export default {
                "y": 110.7468466966166
             }
          ],
-         "handle": "130",
+         "handle": "178",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1837,9 +1853,9 @@ export default {
                "y": 110.7468466966166
             }
          ],
-         "handle": "131",
+         "handle": "179",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1863,9 +1879,9 @@ export default {
                "y": 90.18147895118454
             }
          ],
-         "handle": "132",
+         "handle": "17A",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1889,9 +1905,9 @@ export default {
                "y": 90.18147895118454
             }
          ],
-         "handle": "133",
+         "handle": "17B",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1915,9 +1931,9 @@ export default {
                "y": 61.04507686039869
             }
          ],
-         "handle": "134",
+         "handle": "17C",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       },
@@ -1941,9 +1957,857 @@ export default {
                "y": 73.79863973390457
             }
          ],
-         "handle": "135",
+         "handle": "17D",
          "ownerHandle": "1F",
-         "layer": "Defpoints",
+         "layer": "0",
+         "shape": false,
+         "hasContinuousLinetypePattern": false
+      },
+      {
+         "type": "INSERT",
+         "handle": "17E",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 22.92085479575127,
+            "y": 179.9257579740862,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "17F",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 41.79487713195869,
+            "y": 175.1732254010462,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "180",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 39.81128088984661,
+            "y": 157.4584205309781,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "181",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 22.52177150985682,
+            "y": 142.1832229234143,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "182",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 53.39136667863733,
+            "y": 146.5556176905258,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "183",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 28.55355991953985,
+            "y": 124.0950703992782,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "184",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 41.24838720520785,
+            "y": 111.4513679400654,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "185",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 39.81128088984661,
+            "y": 91.96570795455628,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "186",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 50.15705367880838,
+            "y": 85.4706421630091,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "187",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 61.58536111283303,
+            "y": 98.41146634258703,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "188",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 74.90676655638237,
+            "y": 80.60052646778686,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "189",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 81.35095711544346,
+            "y": 62.93278765985465,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "18A",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 102.3333714115477,
+            "y": 69.43733609164715,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "18B",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 64.39861484778868,
+            "y": 128.933669881218,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "18C",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 71.5729754182392,
+            "y": 153.0350374225733,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "18D",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 87.59316470061896,
+            "y": 147.9112447546624,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "18E",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 92.36670770502388,
+            "y": 165.9325254624463,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "18F",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 83.79805867104898,
+            "y": 185.9260398750531,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "190",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 65.82069697231856,
+            "y": 191.9744980166821,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "191",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 55.03427070493655,
+            "y": 213.0557020122273,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "192",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 72.06364660883065,
+            "y": 213.1443366776317,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "193",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 93.83290144103904,
+            "y": 224.9469447191906,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "194",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 99.98533873292564,
+            "y": 240.8879405603876,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "195",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 124.9628047110171,
+            "y": 237.2621793700165,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "196",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 134.0020287897785,
+            "y": 248.3492870840779,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "197",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 151.4493259252757,
+            "y": 233.9838869603929,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "198",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 155.3539153249374,
+            "y": 252.7072835450139,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "199",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 164.3030652836431,
+            "y": 245.4947518038101,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "19A",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 173.5968075096583,
+            "y": 254.3238059674966,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "19B",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 103.8439692542914,
+            "y": 37.02881792987128,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "19C",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 75.91394380814728,
+            "y": 42.78626658197109,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "19D",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 72.75367537236963,
+            "y": 117.2661543326905,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "19E",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 89.40327008659898,
+            "y": 107.0397535183671,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "19F",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 99.06405206983328,
+            "y": 108.1626458179022,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1A0",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 115.2146979500711,
+            "y": 114.6581969237433,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1A1",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 110.7263371299894,
+            "y": 91.04922281663508,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1A2",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 130.5849549188677,
+            "y": 74.28392850881133,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1A3",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 131.5316394662339,
+            "y": 100.9094314034839,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1A4",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 129.7057095050966,
+            "y": 121.0638288042093,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1A5",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 112.30821852229,
+            "y": 135.9384604648616,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1A6",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 95.43151313210984,
+            "y": 135.9384604648616,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1A7",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 108.9999675945035,
+            "y": 173.0884136505107,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1A8",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 121.5258464318393,
+            "y": 164.695447932069,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1A9",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 134.4510136382403,
+            "y": 173.0884136505107,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1AA",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 118.8412456351551,
+            "y": 193.1434782917576,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1AB",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 101.6375009730808,
+            "y": 194.6394560884598,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1AC",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 112.1925139501307,
+            "y": 213.9311772137354,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1AD",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 135.7094100130042,
+            "y": 218.7279092443238,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1AE",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 143.9558523184349,
+            "y": 189.0820142652398,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1AF",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 159.35348501546,
+            "y": 197.5907077023777,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1B0",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 155.6536981722718,
+            "y": 209.3277876396689,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1B1",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 180.8519551964017,
+            "y": 204.8450442282002,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1B2",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 168.1988576303127,
+            "y": 175.0861480971365,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1B3",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 183.8540629862362,
+            "y": 179.1204758558378,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1B4",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 199.7907988840232,
+            "y": 166.3593767943818,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1B5",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 201.7876508504112,
+            "y": 151.9374227693144,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1B6",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 219.2450195447707,
+            "y": 160.4982478021253,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1B7",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 195.0547450530592,
+            "y": 196.3644649642931,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1B8",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 191.5061898113216,
+            "y": 210.6706621546197,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1B9",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 183.8540629862362,
+            "y": 218.7279092443238,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1BA",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 168.1988576303127,
+            "y": 223.6254276254741,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1BB",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 195.4953339441379,
+            "y": 229.201805023714,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1BC",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 191.6588760312514,
+            "y": 238.5234645378661,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1BD",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 207.1076670317514,
+            "y": 241.978820784476,
+            "z": 0
+         }
+      },
+      {
+         "type": "INSERT",
+         "handle": "1BE",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "name": "LED",
+         "position": {
+            "x": 220.7899141019223,
+            "y": 253.1738128054602,
+            "z": 0
+         }
+      },
+      {
+         "type": "LWPOLYLINE",
+         "vertices": [
+            {
+               "x": 176.1348107918711,
+               "y": 187.6930007547853
+            },
+            {
+               "x": 176.0451716586497,
+               "y": 160.6747836609094
+            },
+            {
+               "x": 151.566654680908,
+               "y": 166.3834059250948
+            },
+            {
+               "x": 142.0400139083249,
+               "y": 175.9797447052188
+            },
+            {
+               "x": 133.1582167346642,
+               "y": 198.9349355343293
+            },
+            {
+               "x": 176.1348107918711,
+               "y": 187.6930007547853
+            }
+         ],
+         "handle": "1CE",
+         "ownerHandle": "1F",
+         "layer": "0",
+         "shape": false,
+         "hasContinuousLinetypePattern": false
+      },
+      {
+         "type": "LWPOLYLINE",
+         "vertices": [
+            {
+               "x": 210.0589249423319,
+               "y": 179.058787534057
+            },
+            {
+               "x": 182.1558313731621,
+               "y": 199.1510453602095
+            },
+            {
+               "x": 185.2485319785628,
+               "y": 204.0893898752838
+            },
+            {
+               "x": 183.84500418061,
+               "y": 209.0743898902292
+            },
+            {
+               "x": 198.9633193585367,
+               "y": 203.2392506987535
+            },
+            {
+               "x": 210.0589249423319,
+               "y": 179.058787534057
+            }
+         ],
+         "handle": "1CF",
+         "ownerHandle": "1F",
+         "layer": "0",
          "shape": false,
          "hasContinuousLinetypePattern": false
       }

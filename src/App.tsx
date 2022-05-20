@@ -4,7 +4,8 @@ import "./App.css";
 import P5JS_App from "./p5/p5mapper";
 import Three_App from "./component/3dcomponent";
 import Paper_App from "./paper/main";
-import styled from "styled-components"
+import styled from "styled-components";
+import draw1 from './paper/draw1';
 
 interface TabProps {
 	selected: boolean;
@@ -29,28 +30,28 @@ const TabContainer = styled.div`
 function App() {
 
 	const [tabIndex, setTabIndex] = useState(0);
-	const [buttonIndex, setbutIndex] = useState(0);
+	const [buttonIndex, setButtonIndex] = useState("");
 
 	return (
 
 
 		<div className="App">
 
-			<button className="tool-button" data-tool-name="toolPath">
+			{/* <button onClick={() => setButtonIndex("path")} className="tool-button" data-tool-name="toolPath">
 				Draw Paths
 			</button>
 
-			<button className="tool-button" data-tool-name="toolCircle">
+			<button onClick={() => setButtonIndex("circle")} className="tool-button" data-tool-name="toolCircle">
 				Stamp Circles
 			</button>
 
-			<button className="tool-button" data-tool-name="toolLed">
+			<button onClick={() => setButtonIndex("led")} className="tool-button" data-tool-name="toolLed">
 				Place Leds
 			</button>
 
-			<button className="tool-button" data-tool-name="toolSelect">
+			<button onClick={() => setButtonIndex("select")} className="tool-button" data-tool-name="toolSelect">
 				Move Points
-			</button>
+			</button> */}
 
 			<header className="App-header">
 

@@ -8,6 +8,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/material": "^5.8.0",
     "@tweakpane/core": "^1.0.9",
     "@tweakpane/plugin-essentials": "^0.1.4",
     "@types/bootstrap": "^5.1.11",

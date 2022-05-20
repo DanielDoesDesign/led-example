@@ -7,7 +7,7 @@ const draw1 = () => {
 
     Paper.view.matrix.d = -1;
     Paper.view.translate(new Paper.Point(0, -Paper.view.viewSize.height));
-    Paper.view.scale(1, 1, new Paper.Point(0, 0))
+    Paper.view.scale(2.5, 2.5, new Paper.Point(0, 0))
     Paper.view.viewSize.width = 800;
     Paper.view.viewSize.height = 800;
 
@@ -18,42 +18,132 @@ const draw1 = () => {
     var to = new Paper.Point(Paper.view.viewSize.width, Paper.view.viewSize.height);
     var rect = new Paper.Path.Rectangle(from, to);
     rect.strokeColor = new Paper.Color('red')
-    rect.fillColor = new Paper.Color('white')
+    rect.fillColor = new Paper.Color('hsl(0, 0%, 30%)')
 
+    var axis_x = 50;
+    var axis_y = 50;
     var axisPoints = [new Paper.Point(0, 500), new Paper.Point(0, 0), new Paper.Point(500, 0)];
     var axis = new Paper.Path(axisPoints)
     axis.strokeColor = new Paper.Color('black')
-    axis.translate(new Paper.Point(20, 20))
+    axis.translate(new Paper.Point(axis_x, axis_y))
 
     let polyLines = []
+    let ledImport = []
+    let leds = [];
 
     const pData = loadedData();
     polyLines = pData.entArray;
+    ledImport = pData.leds;
 
-    //add polys to array
+    console.log(ledImport);
+
+
+    //import and draw polys
     for (let i = 0; i < polyLines.length; i++) {
         var newPoly = new Paper.Path();
         newPoly.strokeColor = new Paper.Color('black')
+        newPoly.strokeWidth = 1.2;
         var thisPoly = polyLines[i];
-        for (let j = 0; j < thisPoly.length; j++) {
+        for (let j = 0; j < thisPoly.length - 1; j++) {
             newPoly.add(new Paper.Point(thisPoly[j].x, thisPoly[j].y));
         }
-        newPoly.translate(new Paper.Point(20, 20))
+        newPoly.closePath();
+        newPoly.translate(new Paper.Point(axis_x, axis_y))
+
+
+        var pocketOffset = PaperOffset.offset(newPoly, -0.6)
+
+        var c1 = PaperOffset.offset(pocketOffset, 0.1);
+
+
+        var pocketGroup1 = new Paper.Group([c1, pocketOffset])
+        pocketGroup1.name = 'pocket';
+        pocketGroup1.fillColor = new Paper.Color('white')
+        pocketGroup1.clipped = true;
+
+        //var topgroup1 = new Paper.Group([newPoly, pocketGroup1])
+
     }
+
+
+
+    //import and draw leds
+    for (let i = 0; i < ledImport.length; i++) {
+        var newLed = new Paper.Point(ledImport[i])
+        newLed.x += axis_x;
+        newLed.y += axis_y;
+        addLed([newLed.x, newLed.y]);
+
+    }
+
+
+    function addLed(pos) {
+        var hitResult = Paper.project.hitTest(pos, hitOptions);
+        if (!hitResult) {
+            return;
+        }
+
+
+
+
+
+        var item = hitResult.item;
+        var group = item.parent;
+
+        var newLed = new Paper.Path.Circle(pos, 30);
+        group.addChild(newLed);
+
+        var newPoint = new Paper.Path.Circle(pos, 1);
+        newPoint.fillColor = new Paper.Color('black')
+
+        var noAlpha = new Paper.Color(1, 1, 1, 0);
+
+        var col = new Paper.Color(1, 0, 0, 1);
+        col.hue = Math.random() * 360;
+        col.sat = 1;
+        col.brightness = 0.8;
+
+        console.log(hitResult);
+
+
+        newLed.fillColor = {
+            gradient: {
+                stops: [[col, 0.2], [noAlpha, 1]],
+                radial: true
+            },
+            origin: newLed.position,
+            destination: newLed.bounds.rightCenter
+        };
+
+        //newLed.blendMode = 'multiply';
+        //newLed.blendMode = 'add';
+        newLed.blendMode = 'average';
+
+        leds.push(newLed);
+
+
+
+    }
+
+    console.log(leds);
 
 
     var mouse = new Paper.Point(new Paper.Point(0, 0));
 
-    var mouseText = new Paper.PointText(new Paper.Point(100, 500));
+    var mouseText = new Paper.PointText(new Paper.Point(20, 5));
+    mouseText.fontSize = 8;
     mouseText.content = 'Mouse position: '
     mouseText.matrix.d = -1;
 
-    var sceneText = new Paper.PointText(new Paper.Point(100, 520));
-    sceneText.fillColor = new Paper.Color('black')
+    var sceneText = new Paper.PointText(new Paper.Point(20, 15));
+    sceneText.fontSize = 8;
     sceneText.content = 'Project Items: ' + Paper.project.activeLayer.toString();
     sceneText.matrix.d = -1;
 
-    var hitText = new Paper.PointText(new Paper.Point(100, 540));
+
+
+    var hitText = new Paper.PointText(new Paper.Point(20, 30));
+    hitText.fontSize = 8;
     hitText.content = 'Mouse Hit: '
     hitText.matrix.d = -1;
 
@@ -73,13 +163,13 @@ const draw1 = () => {
 
         if (item.getClassName() === 'Group') {
 
-            var newOffset = PaperOffset.offset(item.children[0], -10)
+            var newOffset = PaperOffset.offset(item.children[0], -0.6)
             newOffset.strokeColor = new Paper.Color('black')
             newOffset.fillColor = new Paper.Color('lightgray')
             newOffset.strokeWidth = 1;
 
 
-            var c1 = PaperOffset.offset(newOffset, 1);
+            var c1 = PaperOffset.offset(newOffset, 0.1);
 
 
             var newGroup = new Paper.Group([c1, newOffset])
@@ -96,49 +186,31 @@ const draw1 = () => {
 
     }
 
-    //newOffset.remove();
-
-
-
-    var moveAmount = 3;
-
+    var moveAmount = 1;
 
     var globalSelected;
     var selectedItems;
 
-
-    var selectCircle = new Paper.Path.Circle(new Paper.Point(600, 600), 10);
+    var selectCircle = new Paper.Path.Circle(new Paper.Point(600, 600), 5);
     selectCircle.strokeColor = new Paper.Color('black')
 
-
-    // var outpath = new Paper.Path();
-    // outpath.strokeColor = 'rgb(191, 91, 91, 0.5)'
-    // outpath.add(new Paper.Point(topleft, topleft));
-    // outpath.add(new Paper.Point(topleft, bottomright));
-    // outpath.add(new Paper.Point(bottomright, bottomright));
-    // outpath.add(new Paper.Point(bottomright, topleft));
-    // outpath.closePath();
-
-    //let offset1 = PaperOffset.offset(outpath, 5)
-    // PaperOffset.offsetStroke(outpath, 3)
-
-
-
-
+    var square_x = 500;
+    var square_y = 100;
+    var size = 150;
 
 
     var tri1 = new Paper.Path();
     tri1.strokeColor = new Paper.Color('black')
-    tri1.add(new Paper.Point(50, 50));
-    tri1.add(new Paper.Point(50, 380));
-    tri1.add(new Paper.Point(380, 380));
+    tri1.add(new Paper.Point(square_x, square_y));
+    tri1.add(new Paper.Point(square_x, square_y + size));
+    tri1.add(new Paper.Point(square_x + size, square_y + size));
     tri1.closePath();
 
     var tri2 = new Paper.Path();
     tri2.strokeColor = new Paper.Color('black')
-    tri2.add(new Paper.Point(50, 50));
-    tri2.add(new Paper.Point(380, 50));
-    tri2.add(new Paper.Point(380, 380));
+    tri2.add(new Paper.Point(square_x, square_y));
+    tri2.add(new Paper.Point(square_x + size, square_y));
+    tri2.add(new Paper.Point(square_x + size, square_y + size));
     tri2.closePath();
 
     //globalSelected[0] = p1.segments[0].point;
@@ -283,7 +355,7 @@ const draw1 = () => {
             var item = hitResult.item;
             var group = item.parent;
 
-            var newLed = new Paper.Path.Circle(event.point, 200);
+            var newLed = new Paper.Path.Circle(event.point, 30);
             group.addChild(newLed);
 
             var noAlpha = new Paper.Color(1, 1, 1, 0);
@@ -304,6 +376,8 @@ const draw1 = () => {
             };
 
             newLed.blendMode = 'multiply';
+            //newLed.blendMode = 'add';
+            //newLed.blendMode = 'average';
         }
 
         return tool
@@ -394,13 +468,13 @@ const draw1 = () => {
             };
             if (event.key == 'w') {
                 for (let i = 0; i < globalSelected.length; i++) {
-                    globalSelected[i].point.y -= moveAmount;
+                    globalSelected[i].point.y += moveAmount;
                     selectCircle.position = globalSelected[0].point;
                 }
             };
             if (event.key == 's') {
                 for (let i = 0; i < globalSelected.length; i++) {
-                    globalSelected[i].point.y += moveAmount;
+                    globalSelected[i].point.y -= moveAmount;
                     selectCircle.position = globalSelected[0].point;
                 }
             };
@@ -430,9 +504,20 @@ const draw1 = () => {
     // Activate a certain Tool
 
     toolStack.activateTool('toolSelect')
+    //toolStack.activateTool('toolLed')
+
+
+
+    var toolText = new Paper.PointText(new Paper.Point(20, 40));
+    toolText.fontSize = 8;
+    toolText.content = 'Active Tool: ' + toolStack.tools[1].name;
+    toolText.matrix.d = -1;
+
 
 
 };
+
+
 
 
 
