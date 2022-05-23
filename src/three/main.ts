@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { sRGBEncoding, ACESFilmicToneMapping } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { fpsGraph } from "./core/gui";
+//import { fpsGraph } from "./core/gui";
 import "./style.css";
 
 import './core/helperFunc';
@@ -24,8 +24,8 @@ export default class SceneManager {
 
 		//this.screenDimensions = {
 		//	width: window.innerWidth,
-	//		height: window.innerHeight,
-	//	};
+		//		height: window.innerHeight,
+		//	};
 
 		this.screenDimensions = {
 			width: 800,
@@ -117,9 +117,9 @@ export default class SceneManager {
 		for (let i = 0; i < this.sceneSubjects.length; i++)
 			this.sceneSubjects[i].update(elapsedTime);
 
-		fpsGraph.begin();
+		//fpsGraph.begin();
 		this.renderer.render(this.scene, this.camera);
-		fpsGraph.end();
+		//fpsGraph.end();
 
 		this.controls.update();
 	}
@@ -128,7 +128,7 @@ export default class SceneManager {
 		requestAnimationFrame(() => this.render());
 		this.update();
 	}
-	
+
 	// TODO: Remember to add this function to the window on resize event listenr
 	resizeCanvas() {
 		this.canvas.style.width = "100%";

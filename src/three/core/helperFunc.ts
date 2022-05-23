@@ -1,5 +1,110 @@
-//import test from "../objects/bear.js"
-import test from "../../objects/uni_poly.js"
+import parse, { DxfParser } from 'dxf-parser';
+
+var dxf;
+var res;
+
+res = await fetch("http://localhost:3000/poly_uni.dxf")
+    .then(req => req.text())
+
+
+async function fetchDXF(filename) {
+    res = await fetch("http://localhost:3000/" + filename)
+        .then(req => req.text())
+    return res;
+}
+
+
+
+
+
+function initDXF() {
+
+    const fileText = res;
+
+    const parser = new DxfParser();
+    try {
+        dxf = parser.parseSync(fileText);
+        console.log('Done writing output');
+    } catch (err) {
+        return console.error(err.stack);
+    }
+
+
+}
+
+export function parseDXF() {
+
+    fetchDXF("poly_uni.dxf")
+
+    const fileText = res;
+
+    const parser = new DxfParser();
+    try {
+        dxf = parser.parseSync(fileText);
+        console.log('Done writing output');
+    } catch (err) {
+        return console.error(err.stack);
+    }
+
+    removeItems();
+
+}
+
+
+initDXF();
+
+function removeItems() {
+
+
+    const newData = new data();
+
+    newData.loadinLines();
+    newData.loadoutLines();
+    newData.loadLeds();
+    newData.loadPolys();
+    return newData
+}
+
+
+export function testButton() {
+    console.log("button clicked!")
+}
+
+export function liveReload() {
+
+
+}
+
+export function loadUnicorn() {
+
+}
+
+
+export function loadBear() {
+
+}
+
+
+export function loadGeo1() {
+
+}
+
+
+export function loadGeo2() {
+
+}
+
+
+/*
+    clear previously imported arrays
+    paper js remove all items from layer
+    rerun import/paper creation 
+
+
+*/
+
+
+
 
 export class Point {
     x: number;
@@ -57,7 +162,7 @@ class data {
     }
 
     loadPolys() {
-        this.entData = test["entities"];
+        this.entData = dxf["entities"];
         this.pointArray = [];
         this.entArray = [];
 
@@ -83,7 +188,7 @@ class data {
 
 
     loadinLines() {
-        this.lineData = test["entities"];
+        this.lineData = dxf["entities"];
         for (let i = 0; i < this.lineData.length; i++) {
             let line = this.lineData[i];
             if (line.type !== "LINE") continue;
@@ -98,7 +203,7 @@ class data {
             }
         }
 
-        this.lineData = test["entities"];
+        this.lineData = dxf["entities"];
         for (let i = 0; i < this.lineData.length; i++) {
             let line = this.lineData[i];
             for (let i = 0; i < this.lineData.length; i++) {
@@ -120,7 +225,7 @@ class data {
 
 
     loadoutLines() {
-        this.lineData = test["entities"];
+        this.lineData = dxf["entities"];
         for (let i = 0; i < this.lineData.length; i++) {
             let line = this.lineData[i];
             if (line.type !== "LWPOLYLINE") continue;
@@ -136,7 +241,7 @@ class data {
     }
 
     loadLeds() {
-        this.lineData = test["entities"];
+        this.lineData = dxf["entities"];
         for (let i = 0; i < this.lineData.length; i++) {
             let ent = this.lineData[i];
             if (ent.type !== "INSERT") continue;
@@ -149,15 +254,28 @@ class data {
         return this.leds;
     }
 
+    resetData() {
+        this.lineData = [];
+        this.inLines = [];
+        this.outLines = [];
+        this.pcbLines = [];
+        this.leds = [];
+    }
+
 
 
 
 }
 
 
-export function loadedData() {
+export function loadedData(reset) {
 
     const newData = new data();
+
+    if (reset) {
+        newData.resetData();
+    }
+
 
     newData.loadinLines();
     newData.loadoutLines();

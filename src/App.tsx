@@ -1,75 +1,95 @@
 import { useState } from "react";
-import { Container } from "react-bootstrap";
 import "./App.css";
 import P5JS_App from "./p5/p5mapper";
 import Three_App from "./component/3dcomponent";
 import Paper_App from "./paper/main";
-import styled from "styled-components";
-import draw1 from './paper/draw1';
-
-interface TabProps {
-	selected: boolean;
-
-}
-
-
-const Tab = styled.div<TabProps>`
-	color: red;
-	flex: 1;		
-	background-color: ${props => props.selected ? "black" : "grey"};
-
-
-`
-const TabContainer = styled.div`
-	display: flex;
-	width: 60%;
-	
-
-`
+import { Container, Tabs, TabList, TabPanels, Tab, TabPanel, Grid, GridItem, Box, Button, ButtonGroup } from '@chakra-ui/react'
+import { Stack, HStack, VStack } from '@chakra-ui/react'
+import { testButton, parseDXF } from "./three/core/helperFunc"
 
 function App() {
-
-	const [tabIndex, setTabIndex] = useState(0);
-	const [buttonIndex, setButtonIndex] = useState("");
 
 	return (
 
 
 		<div className="App">
 
-			{/* <button onClick={() => setButtonIndex("path")} className="tool-button" data-tool-name="toolPath">
-				Draw Paths
-			</button>
-
-			<button onClick={() => setButtonIndex("circle")} className="tool-button" data-tool-name="toolCircle">
-				Stamp Circles
-			</button>
-
-			<button onClick={() => setButtonIndex("led")} className="tool-button" data-tool-name="toolLed">
-				Place Leds
-			</button>
-
-			<button onClick={() => setButtonIndex("select")} className="tool-button" data-tool-name="toolSelect">
-				Move Points
-			</button> */}
-
 			<header className="App-header">
+				<Container minW='1500px' centerContent>
+					<Tabs isFitted variant='enclosed'>
+						<TabList>
+							<Tab>PaperJS</Tab>
+							<Tab>ThreeJS</Tab>
+							<Tab>Other</Tab>
+						</TabList>
+						<TabPanels>
+							<TabPanel>
 
-				<TabContainer>
-					<Tab onClick={() => setTabIndex(0)} selected={tabIndex == 0}>PaperJS</Tab>
-					<Tab onClick={() => setTabIndex(1)} selected={tabIndex == 1}>ThreeJS</Tab>
-				</TabContainer>
+								<Grid templateRows='repeat(2, 1fr)' templateColumns='repeat(3, 1fr)' gap={4}>
+									<GridItem rowSpan={1} bg='darkgrey'>
+										Design Pick<br></br>
+										<Button colorScheme='green' onClick={testButton}>TEST</Button>
+										<br></br>
+										<Button colorScheme='green' onClick={parseDXF}>Unicorn</Button><br></br>
+										<Button colorScheme='blue'>Bear</Button><br></br>
+										<Button colorScheme='red'>Geo1</Button><br></br>
+										<Button colorScheme='yellow'>Geo2</Button><br></br>
+									</GridItem>
+									<GridItem colSpan={1} rowStart={2} colStart={1} bg='darkgrey'>
+										Move Controls<br></br>
+										<br></br>
+										<br></br>
+										<br></br>
+										<Button colorScheme='red'>^</Button><br></br>
+										<Button colorScheme='red'> {'<'} </Button>   <Button colorScheme='red'> {'>'} </Button><br></br>
+										<Button colorScheme='red'>v</Button><br></br>
+									</GridItem>
+									<GridItem rowSpan={2} bg='darkgrey'>
+										<Paper_App />
+									</GridItem>
+									<GridItem rowSpan={1} bg='darkgrey'>
+										Functions<br></br>
+										<Button colorScheme='blue'>Import DXF</Button><br></br>
+										<Button colorScheme='blue'>UpdateLEDs</Button><br></br>
 
-				<div>
-					{tabIndex === 0 && <Container>
-						<Paper_App />
-					</Container>}
-					{tabIndex === 1 && <Container>
-						<Three_App />
-					</Container>}
-				</div>
+										<Button colorScheme='blue'>Draw Line</Button><br></br>
+										<Button colorScheme='blue'>Add LED</Button><br></br>
+										<Button colorScheme='blue'>Move Points</Button><br></br>
+
+									</GridItem>
+									<GridItem colSpan={1} rowStart={2} colStart={3} bg='darkgrey'>
+										Output<br></br>
+										<Button colorScheme='blue'>Export Design</Button><br></br>
+									</GridItem>
+								</Grid>
+
+							</TabPanel>
+							<TabPanel>
+
+								<Grid templateColumns='repeat(5, 1fr)' gap={4}>
+									<GridItem colSpan={2} h='800' bg='darkgrey' />
+									<Three_App />
+									<GridItem colStart={4} colEnd={6} h='800' bg='darkgrey' />
+								</Grid>
+
+							</TabPanel>
+							<TabPanel>
+
+								<Grid templateColumns='repeat(5, 1fr)' gap={4}>
+									<GridItem colSpan={2} h='800' bg='darkgrey' />
+									<Box bg='red' minW='800' p={4} color='white'>
+										Upcoming Feature Placeholder
+									</Box>
+									<GridItem colStart={4} colEnd={6} h='800' bg='darkgrey' />
+								</Grid>
+
+							</TabPanel>
+						</TabPanels>
+					</Tabs>
+				</Container>
+
 			</header>
-		</div>
+		</div >
 	)
 }
 

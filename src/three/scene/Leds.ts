@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { gui } from '../core/gui'
+//import { gui } from '../core/gui'
 import { loadedData } from '../core/helperFunc'
 
 export function leds(scene) {
@@ -104,32 +104,32 @@ export function leds(scene) {
 	}
 
 
-
-	gui.addInput(ledGroup.position, 'z', {
-		label: 'LED Z', min: -30, max: 30, step: 1
-	})
-
-	gui.addInput(spots[0], 'angle',
-		{ label: 'LED ANGLE', min: 0, max: 1, step: 0.01 })
-		.on('change', (ev) => {
-			updateLedAngle(ev.value);
-		});
-
-	gui.addInput(spots[0], 'penumbra',
-		{ label: 'LED PEN', min: 0, max: 1, step: 0.01 })
-		.on('change', (ev) => {
-			updateLedsPn(ev.value);
-		});
-
-
-	gui.addInput(helpers[0], 'visible', { label: 'LED HELPER' })
-		.on('change', (ev) => {
-			console.log(ev.value);
-			toggleHelpers(ev.value);
-		});
-
-
-
+	/*
+		gui.addInput(ledGroup.position, 'z', {
+			label: 'LED Z', min: -30, max: 30, step: 1
+		})
+	
+		gui.addInput(spots[0], 'angle',
+			{ label: 'LED ANGLE', min: 0, max: 1, step: 0.01 })
+			.on('change', (ev) => {
+				updateLedAngle(ev.value);
+			});
+	
+		gui.addInput(spots[0], 'penumbra',
+			{ label: 'LED PEN', min: 0, max: 1, step: 0.01 })
+			.on('change', (ev) => {
+				updateLedsPn(ev.value);
+			});
+	
+	
+		gui.addInput(helpers[0], 'visible', { label: 'LED HELPER' })
+			.on('change', (ev) => {
+				console.log(ev.value);
+				toggleHelpers(ev.value);
+			});
+	
+	
+	*/
 
 	this.update = function (time) {
 

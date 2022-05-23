@@ -5,9 +5,11 @@ import { PaperOffset } from "paperjs-offset"
 
 const draw1 = () => {
 
+    var scale = 2;
+
     Paper.view.matrix.d = -1;
     Paper.view.translate(new Paper.Point(0, -Paper.view.viewSize.height));
-    Paper.view.scale(2.5, 2.5, new Paper.Point(0, 0))
+    Paper.view.scale(scale, scale, new Paper.Point(0, 0))
     Paper.view.viewSize.width = 800;
     Paper.view.viewSize.height = 800;
 
@@ -15,10 +17,10 @@ const draw1 = () => {
 
     //Set background
     var from = new Paper.Point(0, 0);
-    var to = new Paper.Point(Paper.view.viewSize.width, Paper.view.viewSize.height);
+    var to = new Paper.Point(Paper.view.viewSize.width - 400, Paper.view.viewSize.height - 400);
     var rect = new Paper.Path.Rectangle(from, to);
-    rect.strokeColor = new Paper.Color('red')
-    rect.fillColor = new Paper.Color('hsl(0, 0%, 30%)')
+    rect.strokeColor = new Paper.Color('rgb(70, 74, 82)')
+    rect.fillColor = new Paper.Color('rgb(50, 54, 62)')
 
     var axis_x = 50;
     var axis_y = 50;
@@ -31,7 +33,7 @@ const draw1 = () => {
     let ledImport = []
     let leds = [];
 
-    const pData = loadedData();
+    const pData = loadedData(true);
     polyLines = pData.entArray;
     ledImport = pData.leds;
 
@@ -58,7 +60,7 @@ const draw1 = () => {
 
         var pocketGroup1 = new Paper.Group([c1, pocketOffset])
         pocketGroup1.name = 'pocket';
-        pocketGroup1.fillColor = new Paper.Color('white')
+        pocketGroup1.fillColor = new Paper.Color('hsl(0, 0%, 30%)')
         pocketGroup1.clipped = true;
 
         //var topgroup1 = new Paper.Group([newPoly, pocketGroup1])
@@ -84,13 +86,10 @@ const draw1 = () => {
         }
 
 
-
-
-
         var item = hitResult.item;
         var group = item.parent;
 
-        var newLed = new Paper.Path.Circle(pos, 30);
+        var newLed = new Paper.Path.Circle(pos, 50);
         group.addChild(newLed);
 
         var newPoint = new Paper.Path.Circle(pos, 1);
@@ -101,21 +100,21 @@ const draw1 = () => {
         var col = new Paper.Color(1, 0, 0, 1);
         col.hue = Math.random() * 360;
         col.sat = 1;
-        col.brightness = 0.8;
+        col.brightness = 1;
 
         console.log(hitResult);
 
 
         newLed.fillColor = {
             gradient: {
-                stops: [[col, 0.2], [noAlpha, 1]],
+                stops: [[col, 0.1], [noAlpha, 1]],
                 radial: true
             },
             origin: newLed.position,
             destination: newLed.bounds.rightCenter
         };
 
-        //newLed.blendMode = 'multiply';
+        //newLed.blendMode = 'normal';
         //newLed.blendMode = 'add';
         newLed.blendMode = 'average';
 
@@ -282,6 +281,16 @@ const draw1 = () => {
         // return item by default.
         return item;
     }
+
+
+
+
+
+
+
+
+
+
 
 
 
