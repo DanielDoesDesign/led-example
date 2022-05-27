@@ -2,7 +2,6 @@ import { Button, Typography, Grid, Paper, Box } from "@mui/material";
 import { styled } from '@mui/material/styles'
 import { test } from '../paper/draw1'
 
-
 export default function MUI() {
     return (
         <div>
