@@ -1,19 +1,26 @@
 import Paper from "paper";
 import { loadedData } from '../three/core/helperFunc'
 import { PaperOffset } from "paperjs-offset"
-import { PaperScope } from "paper/dist/paper-core";
 
+export class ToolStack {
+	tools: any[];
+	constructor(tools) {
+		this.tools = tools.map(tool => tool())
+	}
 
-
+	activateTool(name) {
+		const tool = this.tools.find(tool => tool.name === name)
+		tool.activate()
+	}
+	// add more methods here as you see fit ...
+}
 
 export function test() {
-
-    console.log(PaperScope.get(0).tools[0]);
-
+	const toolStack = Paper.toolStack
+	toolStack.activateTool('toolLed')
 }
 
 const draw1 = () => {
-
     var scale = 2;
 
     Paper.view.matrix.d = -1;
@@ -291,35 +298,6 @@ const draw1 = () => {
         return item;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    // Toolstack
-
-    class ToolStack {
-
-        tools: any[];
-
-        constructor(tools) {
-            this.tools = tools.map(tool => tool())
-        }
-
-        activateTool(name) {
-            const tool = this.tools.find(tool => tool.name === name)
-            tool.activate()
-        }
-        // add more methods here as you see fit ...
-    }
-
     // Tool Path, draws paths on mouse-drag
 
     const toolPath = () => {
@@ -511,32 +489,18 @@ const draw1 = () => {
         return tool
     }
 
-
-
-
-
     // Construct a Toolstack, passing your Tools
-
     const toolStack = new ToolStack([toolSelect, toolLed, toolPath, toolCircle])
+	Paper.toolStack = toolStack
 
     // Activate a certain Tool
-
     toolStack.activateTool('toolSelect')
     //toolStack.activateTool('toolLed')
-
-
 
     var toolText = new Paper.PointText(new Paper.Point(20, 40));
     toolText.fontSize = 8;
     toolText.content = 'Active Tool: ' + toolStack.tools[1].name;
     toolText.matrix.d = -1;
-
-
-
 };
-
-
-
-
 
 export default draw1;
