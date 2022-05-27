@@ -1,7 +1,16 @@
 import Paper from "paper";
 import { loadedData } from '../three/core/helperFunc'
 import { PaperOffset } from "paperjs-offset"
+import { PaperScope } from "paper/dist/paper-core";
 
+
+
+
+export function test() {
+
+    console.log(PaperScope.get(0).tools[0]);
+
+}
 
 const draw1 = () => {
 
